@@ -23,4 +23,8 @@
     border-radius: theme('borderRadius.2xl');
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px theme('colors.blue.400');
   }
+
+  p {
+    @apply mb-2 text-lg;
+  }
 }
