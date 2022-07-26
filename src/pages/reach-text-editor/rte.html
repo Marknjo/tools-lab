@@ -19,13 +19,87 @@
     </noscript>
 
     <!-- Page Content -->
-    <main class=" bg-slate-100/25 min-h-[80vh]">
+    <main class=" bg-blue-400 min-h-[80vh]">
 
-        <h1 class="text-4xl text-center capitalize tracking-wide pb-2 mt-6 border-b-2 border-gray-100"><i
-                class="fa-solid fa-user"></i> Reach Text Editor
-        </h1>
-        <div id="app"></div>
+        <header class="bg-slate-100">
+            <h1 class="text-4xl text-center capitalize tracking-wide pb-2 mt-6 border-b-2 border-gray-100">
+                <i class="fa-solid fa-user"></i> Reach Text Editor
+            </h1>
+        </header>
 
+        <div class="">
+            <section class="menu">
+                <div class="menu__item" title="Bold"><i class="fa-solid fa-bold"></i></div>
+                <div class="menu__item" title="Italicize"><i class="fa-solid fa-italic"></i></div>
+                <div class="menu__item" title="Underline"><i class="fa-solid fa-underline"></i></div>
+                <div class="menu__item" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></div>
+                <div class="menu__item" title="Superscript"><i class="fa-solid fa-superscript"></i></div>
+                <div class="menu__item" title="Subscript"><i class="fa-solid fa-subscript"></i></div>
+                <div class="menu__item" title="Ordered List"><i class="fa-solid fa-list-ol"></i></div>
+                <div class="menu__item" title="Unordered List"><i class="fa-solid fa-list-ul"></i></div>
+                <div class="menu__item" title="Redo"><i class="fa-solid fa-rotate-right"></i></div>
+                <div class="menu__item" title="Undo"><i class="fa-solid fa-rotate-left"></i></div>
+                <div class="menu__item" title="Add Link"><i class="fa-solid fa-link"></i></div>
+                <div class="menu__item" title="Break Link"><i class="fa-solid fa-link-slash"></i></div>
+                <div class="menu__item" title="Text Align Left"><i class="fa-solid fa-align-left"></i></div>
+                <div class="menu__item" title="Text Align Center"><i class="fa-solid fa-align-center"></i></div>
+                <div class="menu__item" title="Text Align Right"><i class="fa-solid fa-align-right"></i></div>
+                <div class="menu__item" title="Text Align Justify"><i class="fa-solid fa-align-justify"></i></div>
+                <div class="menu__item" title="Text Indent"><i class="fa-solid fa-indent"></i></div>
+                <div class="menu__item" title="Text Outdent"><i class="fa-solid fa-outdent"></i></div>
+
+                <div class="menu__item">
+                    <select name="heading-level" id="heading-selector" title="Select heading level">
+                        <option value="h1" default>H1</option>
+                        <option value="h2">H2</option>
+                        <option value="h3">H3</option>
+                        <option value="h4">H4</option>
+                        <option value="h5">H5</option>
+                        <option value="h6">H6</option>
+                    </select>
+                </div>
+                <div class="menu__item">
+                    <select name="font-type" id="font-selector" title="Select font type">
+                        <option value="Arial" default>Arial</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="menu__item">
+                    <select name="font-size" id="">
+                        <option value="2">2 </option>
+                        <option value="6">6 </option>
+                        <option value="8">8 </option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+
+                <div class="menu__item">
+                    <input type="color" name="font-color" id="font-color">
+                    <label for="font-color">Font Color</label>
+                </div>
+
+                <div class="menu__item">
+                    <input type="color" name="highlight-color" id="highlight-color">
+                    <label for="highlight-color">Highlight Color</label>
+                </div>
+
+            </section>
+            <section class="text-editor">
+                <article contenteditable="true" id="editor">
+                    <p>Start Typing</p>
+                </article>
+            </section>
+
+        </div>
     </main>
 
 
