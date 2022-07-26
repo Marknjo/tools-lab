@@ -1,8 +1,8 @@
 import '~/js/fouc-fix';
 // import '@/reach-text-editor/js/all.min.js';
 
-import '@/reach-text-editor/styles/rte.css';
+import '@/rich-text-editor/styles/rte.css';
 
-console.log('Reach Text editor');
+console.log('Rich Text editor');
 
 export {};
