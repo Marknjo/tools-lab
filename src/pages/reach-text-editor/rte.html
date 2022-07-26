@@ -19,37 +19,74 @@
     </noscript>
 
     <!-- Page Content -->
-    <main class=" bg-blue-400 min-h-[80vh]">
+    <main class=" bg-blue-400 min-h-[80vh] mt-0 pt-4 pb-16">
 
-        <header class="bg-slate-100">
-            <h1 class="text-4xl text-center capitalize tracking-wide pb-2 mt-6 border-b-2 border-gray-100">
-                <i class="fa-solid fa-user"></i> Reach Text Editor
+        <header class="bg-blue-200 pt-6 pb-36">
+            <h1 class="uppercase tracking-wider font-light text-4xl text-blue-900 text-center pb-2 mt-6">
+                Reach Text Editor
             </h1>
         </header>
 
-        <div class="">
-            <section class="menu">
-                <div class="menu__item" title="Bold"><i class="fa-solid fa-bold"></i></div>
-                <div class="menu__item" title="Italicize"><i class="fa-solid fa-italic"></i></div>
-                <div class="menu__item" title="Underline"><i class="fa-solid fa-underline"></i></div>
-                <div class="menu__item" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></div>
-                <div class="menu__item" title="Superscript"><i class="fa-solid fa-superscript"></i></div>
-                <div class="menu__item" title="Subscript"><i class="fa-solid fa-subscript"></i></div>
-                <div class="menu__item" title="Ordered List"><i class="fa-solid fa-list-ol"></i></div>
-                <div class="menu__item" title="Unordered List"><i class="fa-solid fa-list-ul"></i></div>
-                <div class="menu__item" title="Redo"><i class="fa-solid fa-rotate-right"></i></div>
-                <div class="menu__item" title="Undo"><i class="fa-solid fa-rotate-left"></i></div>
-                <div class="menu__item" title="Add Link"><i class="fa-solid fa-link"></i></div>
-                <div class="menu__item" title="Break Link"><i class="fa-solid fa-link-slash"></i></div>
-                <div class="menu__item" title="Text Align Left"><i class="fa-solid fa-align-left"></i></div>
-                <div class="menu__item" title="Text Align Center"><i class="fa-solid fa-align-center"></i></div>
-                <div class="menu__item" title="Text Align Right"><i class="fa-solid fa-align-right"></i></div>
-                <div class="menu__item" title="Text Align Justify"><i class="fa-solid fa-align-justify"></i></div>
-                <div class="menu__item" title="Text Indent"><i class="fa-solid fa-indent"></i></div>
-                <div class="menu__item" title="Text Outdent"><i class="fa-solid fa-outdent"></i></div>
+        <div class="bg-slate-50 mx-auto -mt-24 p-5 max-w-3xl shadow-xl rounded-xl">
+            <section id="menu" class="flex flex-wrap gap-x-3 gap-y-2 my-8 text-lg text-gray-600">
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Bold"><i class="fa-solid fa-bold"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Italicize"><i class="fa-solid fa-italic"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Underline"><i class="fa-solid fa-underline"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Superscript"><i class="fa-solid fa-superscript"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Subscript"><i class="fa-solid fa-subscript"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Ordered List"><i class="fa-solid fa-list-ol"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Unordered List"><i class="fa-solid fa-list-ul"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Redo"><i class="fa-solid fa-rotate-right"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Add Link"><i class="fa-solid fa-link"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Break Link"><i class="fa-solid fa-link-slash"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Align Left"><i class="fa-solid fa-align-left"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Align Center"><i class="fa-solid fa-align-center"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Align Right"><i class="fa-solid fa-align-right"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Align Justify"><i class="fa-solid fa-align-justify"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Indent"><i class="fa-solid fa-indent"></i></button>
+                <button
+                    class="menu__item py-1 px-4  border border-transparent hover:border-blue-400 active:text-blue-600 rounded"
+                    title="Text Outdent"><i class="fa-solid fa-outdent"></i></button>
 
                 <div class="menu__item">
-                    <select name="heading-level" id="heading-selector" title="Select heading level">
+                    <select name="heading-level" id="heading-selector" title="Select heading level"
+                        class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
                         <option value="h1" default>H1</option>
                         <option value="h2">H2</option>
                         <option value="h3">H3</option>
@@ -58,8 +95,10 @@
                         <option value="h6">H6</option>
                     </select>
                 </div>
+
                 <div class="menu__item">
-                    <select name="font-type" id="font-selector" title="Select font type">
+                    <select name="font-type" id="font-selector" title="Select font type"
+                        class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
                         <option value="Arial" default>Arial</option>
                         <option value="Georgia">Georgia</option>
                         <option value=""></option>
@@ -67,8 +106,9 @@
                         <option value=""></option>
                     </select>
                 </div>
+
                 <div class="menu__item">
-                    <select name="font-size" id="">
+                    <select name="font-size" id="" class="px-2 py-1 border border-blue-300 rounded">
                         <option value="2">2 </option>
                         <option value="6">6 </option>
                         <option value="8">8 </option>
@@ -83,18 +123,19 @@
                 </div>
 
                 <div class="menu__item">
-                    <input type="color" name="font-color" id="font-color">
+                    <input type="color" name="font-color" id="font-color" class="inline-block rounded-3xl">
                     <label for="font-color">Font Color</label>
                 </div>
 
                 <div class="menu__item">
-                    <input type="color" name="highlight-color" id="highlight-color">
+                    <input type="color" name="highlight-color" id="highlight-color" class="inline-block rounded-3xl">
                     <label for="highlight-color">Highlight Color</label>
                 </div>
 
             </section>
             <section class="text-editor">
-                <article contenteditable="true" id="editor">
+                <article contenteditable="true" id="editor"
+                    class="min-h-[60vh] p-3 text-lg border border-blue-200 rounded-md hover:border-blue-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
                     <p>Start Typing</p>
                 </article>
             </section>

@@ -2,5 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
+  input[type='color'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    width: 40px;
+    height: 28px;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type='color']::-webkit-color-swatch {
+    border-radius: 15px;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px theme('colors.blue.400');
+  }
+
+  input[type='color']::-moz-color-swatch {
+    border-radius: theme('borderRadius.2xl');
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px theme('colors.blue.400');
+  }
 }
