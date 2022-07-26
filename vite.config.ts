@@ -1,9 +1,8 @@
 // vite.config.js
-import { parse, resolve, join } from 'path';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 const root = resolve(__dirname, 'src');
-const outDir = resolve(__dirname, 'dist');
 
 console.log(resolve(root, 'pages', 'about', 'about.html'));
 
@@ -19,7 +18,12 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         template: resolve(root, 'pages', 'template', 'template.html'),
-        about: resolve(root, 'pages', 'about', 'about.html'),
+        about: resolve(
+          root,
+          'pages',
+          'reach-text-editor',
+          'reach-text-editor.html'
+        ),
       },
     },
   },
