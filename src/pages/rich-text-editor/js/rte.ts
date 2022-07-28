@@ -31,7 +31,7 @@ import '@/rich-text-editor/styles/rte.css';
 
 // ideas
 // -> Basic text manipulations, we use document.createElement
-// -> For advanced manipulation, we use use templates -> this applies to anchor tags
+// ->@DONE: For advanced manipulation, we use use templates -> this applies to anchor tags
 // -> For font sizes and font families, we add supported font sizes and family {supportedFonts: [], supported: Sizes}
 // -> For colors, we use style, color or bg color style
 // -> Need to know how to handle adding fonts per element and per document

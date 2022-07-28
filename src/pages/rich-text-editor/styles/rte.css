@@ -33,4 +33,17 @@
   .active {
     @apply text-blue-500 border-blue-500;
   }
+
+  .add-link::before {
+    content: '';
+    background-color: theme(colors.blue.100);
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: -6px;
+    left: 3rem;
+    transform: rotate(45deg);
+    z-index: theme(zIndex.30);
+  }
 }
