@@ -28,3 +28,9 @@
     @apply mb-2 text-lg;
   }
 }
+
+@layer components {
+  .active {
+    @apply text-blue-500 border-blue-500;
+  }
+}
