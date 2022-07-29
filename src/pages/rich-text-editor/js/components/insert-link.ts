@@ -1,6 +1,10 @@
 import Component from '../core/base-component';
+import { ComponentConfigurables } from '../core/types/component-configurables';
 
-class InsertLink extends Component<HTMLDivElement, HTMLFormElement> {
+class InsertLink
+  extends Component<HTMLDivElement, HTMLFormElement>
+  implements ComponentConfigurables
+{
   constructor() {
     super({
       htmlElId: 'link-inserter-form',
@@ -8,10 +12,6 @@ class InsertLink extends Component<HTMLDivElement, HTMLFormElement> {
       templateId: 'template-add-url',
     });
   }
-
-  config(): void {}
-
-  sideEffects(): void {}
 }
 
 export default InsertLink;

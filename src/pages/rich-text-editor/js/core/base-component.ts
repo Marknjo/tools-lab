@@ -5,12 +5,14 @@ abstract class Component<
   R extends HTMLElement,
   E extends HTMLElement
 > {
-  template: HTMLTemplateElement;
-  rootEl: R;
+  htmlElId: string | undefined;
   htmlEl: E;
-  insertPosition: INSERTABLE;
+  private template: HTMLTemplateElement;
+  private rootEl: R;
+  private insertPosition: INSERTABLE;
 
   constructor(options: ComponentConfigs) {
+    this.htmlElId = options.htmlElId;
     /// Prep Configs
     this.rootEl = document.getElementById(options.rootElId)! as R;
 
@@ -23,7 +25,7 @@ abstract class Component<
       : INSERTABLE.BEFORE_END;
 
     /// Assign html element
-    this.htmlEl = this.getHtmlElement(options);
+    this.htmlEl = this.getHtmlElement();
 
     // Configure HTML ELEMENT
 
@@ -44,9 +46,7 @@ abstract class Component<
   /**
    * Extract and Configure the HTML Element from the Template
    */
-  private getHtmlElement(
-    options: Pick<ComponentConfigs, 'htmlElId'>
-  ): E {
+  private getHtmlElement(): E {
     const extractHtml = document.importNode(
       this.template.content,
       true
@@ -54,22 +54,12 @@ abstract class Component<
 
     const extractedHtmlEl = extractHtml.firstElementChild! as E;
 
-    if (options.htmlElId) {
-      extractedHtmlEl.id = options.htmlElId;
+    if (this.htmlElId) {
+      extractedHtmlEl.id = this.htmlElId;
     }
 
     return extractedHtmlEl;
   }
-
-  /**
-   * Implement configure method
-   */
-  abstract config(): void;
-
-  /**
-   * Implement A method to add side effects
-   */
-  abstract sideEffects(): void;
 }
 
 export default Component;

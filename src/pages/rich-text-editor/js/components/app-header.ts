@@ -1,7 +1,11 @@
 import Component from '../core/base-component';
+import { ComponentConfigurables } from '../core/types/component-configurables';
 import { INSERTABLE } from '../core/types/insert-positions';
 
-class AppHeader extends Component<HTMLDivElement, HTMLFormElement> {
+class AppHeader
+  extends Component<HTMLDivElement, HTMLFormElement>
+  implements ComponentConfigurables
+{
   constructor() {
     super({
       templateId: 'template-header',
@@ -9,10 +13,6 @@ class AppHeader extends Component<HTMLDivElement, HTMLFormElement> {
       insertPosition: INSERTABLE.AFTER_BEGIN,
     });
   }
-
-  config(): void {}
-
-  sideEffects(): void {}
 }
 
 export default AppHeader;
