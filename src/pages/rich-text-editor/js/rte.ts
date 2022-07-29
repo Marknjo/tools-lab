@@ -2,6 +2,7 @@ import '~/js/fouc-fix';
 // import '@/reach-text-editor/js/all.min.js';
 
 import '@/rich-text-editor/styles/rte.css';
+// import InsertLink from './components/insert-link';
 
 /// Get buttons selector
 
