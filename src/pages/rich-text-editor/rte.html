@@ -26,64 +26,6 @@
         <a class="inline-block text-center uppercase tracking-wider px-1 text-slate-500 border-b-2 hover:text-slate-700 hover:border-slate-300 py-2 pt-[10px] transition-all hover:text-slate-90"
             href="/">Home</a>
     </footer>
-
-    <template id="template-add-url">
-        <form
-            class="bg-blue-100 py-4 px-4 rounded-md flex flex-col max-w-[300px] absolute top-8 -left-10 add-link shadow-lg">
-            <div class="space-y-3 mb-4 z-40">
-                <div class="flex items-center gap-4" id="add-url-link">
-                    <label for="anchor-url" class="text-sm font-semibold tracking-wide uppercase">Url:</label>
-                    <input type="text"
-                        class="min-w-[80%] py-[0.15rem] px-2 rounded bg-blue-50 border border-blue-300 shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-200"
-                        name="anchor-url" id="anchor-url" placeholder="http://example.com" />
-                </div>
-
-                <div class="flex items-center gap-2" id="add-url-text">
-                    <label for="anchor-text" class="text-sm font-semibold tracking-wide uppercase">Text:</label>
-                    <input type="text"
-                        class="min-w-[80%] ml-[0.1rem] py-[0.15rem] px-2 rounded bg-blue-50 border border-blue-300 shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-200"
-                        name="anchor-text" id="anchor-text" />
-                </div>
-
-            </div>
-
-            <div class="flex gap-x-4">
-                <div class="self-end flex flex-col items-center gap-1">
-                    <input type="checkbox" class="w-4 h-4 text-blue-300 border-blue-300 focus:ring-blue-400"
-                        name="anchor-blank-target" id="anchor-blank-target" title="Set target blank" />
-                    <label for="anchor-blank-target" class="text-xs uppercase tracking-wide font-semibold">
-                        Blank</label>
-                </div>
-
-                <div class="self-end flex flex-col items-center gap-1">
-                    <!--  rel=”noopener”  -->
-                    <input type="checkbox" class="w-4 h-4 text-blue-300 border-blue-300 focus:ring-blue-400"
-                        name="anchor-noopener" id="anchor-noopener" title="Set noopener" />
-                    <label for="anchor-noopener" class="text-xs uppercase tracking-wide font-semibold">Noopener</label>
-                </div>
-
-                <div class="ml-auto">
-                    <button type="button"
-                        class="py-[0.15rem] px-2 text-blue-50 bg-blue-500 rounded-md min-w-[50px] shadow-md hover:shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-600">Add</button>
-                </div>
-            </div>
-        </form>
-    </template>
-
-    <template id="template-header">
-        <header class="pt-6 pb-36">
-            <h1 class="uppercase tracking-wider font-extrabold text-4xl text-blue-900 text-center pb-2 mt-6">
-                Rich Text Editor
-            </h1>
-        </header>
-    </template>
-
-    <template id="template-feature-btn">
-        <button id="feat-bold"
-            class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
-            title="Bold"><i class="fa-solid fa-bold"></i></button>
-    </template>
-
     <template id="template-rich-editor">
         <div class="bg-slate-50 mx-auto -mt-28 p-5 max-w-3xl shadow-xl rounded-xl">
             <!-- Controls -->
@@ -242,6 +184,63 @@
                 </article> -->
             </section>
         </div>
+    </template>
+
+    <template id="template-add-url">
+        <form
+            class="bg-blue-100 py-4 px-4 rounded-md flex flex-col max-w-[300px] absolute top-8 -left-10 add-link shadow-lg">
+            <div class="space-y-3 mb-4 z-40">
+                <div class="flex items-center gap-4" id="add-url-link">
+                    <label for="anchor-url" class="text-sm font-semibold tracking-wide uppercase">Url:</label>
+                    <input type="text"
+                        class="min-w-[80%] py-[0.15rem] px-2 rounded bg-blue-50 border border-blue-300 shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-200"
+                        name="anchor-url" id="anchor-url" placeholder="http://example.com" />
+                </div>
+
+                <div class="flex items-center gap-2" id="add-url-text">
+                    <label for="anchor-text" class="text-sm font-semibold tracking-wide uppercase">Text:</label>
+                    <input type="text"
+                        class="min-w-[80%] ml-[0.1rem] py-[0.15rem] px-2 rounded bg-blue-50 border border-blue-300 shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-200"
+                        name="anchor-text" id="anchor-text" />
+                </div>
+
+            </div>
+
+            <div class="flex gap-x-4">
+                <div class="self-end flex flex-col items-center gap-1">
+                    <input type="checkbox" class="w-4 h-4 text-blue-300 border-blue-300 focus:ring-blue-400"
+                        name="anchor-blank-target" id="anchor-blank-target" title="Set target blank" />
+                    <label for="anchor-blank-target" class="text-xs uppercase tracking-wide font-semibold">
+                        Blank</label>
+                </div>
+
+                <div class="self-end flex flex-col items-center gap-1">
+                    <!--  rel=”noopener”  -->
+                    <input type="checkbox" class="w-4 h-4 text-blue-300 border-blue-300 focus:ring-blue-400"
+                        name="anchor-noopener" id="anchor-noopener" title="Set noopener" />
+                    <label for="anchor-noopener" class="text-xs uppercase tracking-wide font-semibold">Noopener</label>
+                </div>
+
+                <div class="ml-auto">
+                    <button type="button"
+                        class="py-[0.15rem] px-2 text-blue-50 bg-blue-500 rounded-md min-w-[50px] shadow-md hover:shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-600">Add</button>
+                </div>
+            </div>
+        </form>
+    </template>
+
+    <template id="template-header">
+        <header class="pt-6 pb-36">
+            <h1 class="uppercase tracking-wider font-extrabold text-4xl text-blue-900 text-center pb-2 mt-6">
+                Rich Text Editor
+            </h1>
+        </header>
+    </template>
+
+    <template id="template-feature-btn">
+        <button id="feat-bold"
+            class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
+            title="Bold"><i class="fa-solid fa-bold"></i></button>
     </template>
 
     <template id="template-button">
