@@ -54,7 +54,9 @@ abstract class Component<
 
     const extractedHtmlEl = extractHtml.firstElementChild! as E;
 
-    extractedHtmlEl.id = options.htmlElId;
+    if (options.htmlElId) {
+      extractedHtmlEl.id = options.htmlElId;
+    }
 
     return extractedHtmlEl;
   }

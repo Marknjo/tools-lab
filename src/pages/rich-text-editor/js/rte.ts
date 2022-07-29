@@ -2,6 +2,7 @@ import '~/js/fouc-fix';
 // import '@/reach-text-editor/js/all.min.js';
 
 import '@/rich-text-editor/styles/rte.css';
+import { bootstrapEditor } from './bootstrap-rtj-components';
 // import InsertLink from './components/insert-link';
 
 /// Get buttons selector
@@ -39,4 +40,5 @@ import '@/rich-text-editor/styles/rte.css';
 // -> Need to know how to wrap elements with select api
 // -> To handle undo and redo, we use local storage to store current article per minute
 
-export {};
+/// Boot strap Application
+bootstrapEditor();

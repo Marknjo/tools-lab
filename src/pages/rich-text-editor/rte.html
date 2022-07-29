@@ -19,16 +19,14 @@
     </noscript>
 
     <!-- Page Content -->
-    <main class=" bg-blue-400 min-h-[80vh] mt-0 pt-10 pb-16">
+    <main id="root" class=" bg-blue-400 min-h-[80vh] mt-0 pt-10 pb-16">
 
-        <header class="bg-blue-200 pt-6 pb-36">
-            <h1 class="uppercase tracking-wider font-extrabold text-4xl text-blue-900 text-center pb-2 mt-6">
-                Rich Text Editor
-            </h1>
-        </header>
+
+
+
+
 
         <div class="bg-slate-50 mx-auto -mt-28 p-5 max-w-3xl shadow-xl rounded-xl">
-
             <!-- Controls -->
             <section id="menu" class="flex flex-wrap gap-x-6 gap-y-2 my-8 text-sm text-gray-600">
                 <!-- Bold, Italic, Underline -->
@@ -184,9 +182,6 @@
                     <p class="text-gray-400">Write an awesome article...</p>
                 </article>
             </section>
-
-
-
         </div>
     </main>
 
@@ -239,7 +234,13 @@
         </form>
     </template>
 
-
+    <template id="template-header">
+        <header class="pt-6 pb-36">
+            <h1 class="uppercase tracking-wider font-extrabold text-4xl text-blue-900 text-center pb-2 mt-6">
+                Rich Text Editor
+            </h1>
+        </header>
+    </template>
     <!-- Scripts -->
     <script>0</script>
     <script type="module" src="./js/rte.ts"></script>
