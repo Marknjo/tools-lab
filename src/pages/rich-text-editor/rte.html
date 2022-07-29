@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <meta charset="UTF-8" />
@@ -19,171 +19,7 @@
     </noscript>
 
     <!-- Page Content -->
-    <main id="root" class=" bg-blue-400 min-h-[80vh] mt-0 pt-10 pb-16">
-
-
-
-
-
-
-        <div class="bg-slate-50 mx-auto -mt-28 p-5 max-w-3xl shadow-xl rounded-xl">
-            <!-- Controls -->
-            <section id="menu" class="flex flex-wrap gap-x-6 gap-y-2 my-8 text-sm text-gray-600">
-                <!-- Bold, Italic, Underline -->
-                <div id="feat-sec-biu">
-                    <button id="feat-bold"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
-                        title="Bold"><i class="fa-solid fa-bold"></i></button>
-                    <button id="feat-italic"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Italicize"><i class="fa-solid fa-italic"></i></button>
-                    <button id="feat-underline"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Underline"><i class="fa-solid fa-underline"></i></button>
-                </div>
-
-                <!-- Strike through, superscript, subscript -->
-                <div id="feat-sec-sss">
-                    <button id="feat-strikethrough"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
-                    <button id="feat-superscript"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Superscript"><i class="fa-solid fa-superscript"></i></button>
-                    <button id="feat-subscript"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Subscript"><i class="fa-solid fa-subscript"></i></button>
-                </div>
-
-                <!-- List ordered, List unordered -->
-                <div id="feat-sec-uo">
-                    <button id="feat-ol-list"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Ordered List"><i class="fa-solid fa-list-ol"></i></button>
-                    <button id="feat-ul-list"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Unordered List"><i class="fa-solid fa-list-ul"></i></button>
-                </div>
-
-                <!-- Undo and redo -->
-                <div id="feat-sec-ur">
-                    <button id="feat-undo"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
-                    <button id="feat-redo"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Redo"><i class="fa-solid fa-rotate-right"></i></button>
-                </div>
-
-                <!-- Anchor text Add and Remove -->
-                <div class="flex" id="feat-sec-links">
-                    <div class="relative" id="insert-url">
-                        <button id="feat-insert-link"
-                            class="menu__item inline-block py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                            title="Add Link"><i class="fa-solid fa-link"></i>
-                        </button>
-                    </div>
-
-                    <div id="break-url">
-                        <button id="feat-break-link"
-                            class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                            title="Break Link"><i class="fa-solid fa-link-slash"></i></button>
-                    </div>
-                </div>
-
-
-                <!-- Align/left/center/right/justify -->
-                <div id="feat-sec-align">
-                    <button id="feat-align-left"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Align Left"><i class="fa-solid fa-align-left"></i></button>
-                    <button id="feat-align-center"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Align Center"><i class="fa-solid fa-align-center"></i></button>
-                    <button id="feat-align-right"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Align Right"><i class="fa-solid fa-align-right"></i></button>
-                    <button id="feat-align-justify"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Align Justify"><i class="fa-solid fa-align-justify"></i></button>
-                </div>
-
-                <!-- Indent and Outdent -->
-                <div id="feat-sec-io">
-                    <button id="feat-indent"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Indent"><i class="fa-solid fa-indent"></i></button>
-                    <button id="feat-oudent"
-                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
-                        title="Text Outdent"><i class="fa-solid fa-outdent"></i></button>
-                </div>
-
-                <!-- Header 1-6 Selection, Font Family Selection, Font Size Selection -->
-                <div class="flex gap-x-4" id="feat-sec-hf">
-                    <div class="menu__item">
-                        <select name="heading-level" id="feat-headings" title="Select heading level"
-                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
-                            <option value="h1" default>H1</option>
-                            <option value="h2">H2</option>
-                            <option value="h3">H3</option>
-                            <option value="h4">H4</option>
-                            <option value="h5">H5</option>
-                            <option value="h6">H6</option>
-                        </select>
-                    </div>
-
-                    <div class="menu__item">
-                        <select name="font-type" id="feat-font-types" title="Select font type"
-                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
-                            <option value="Arial" default>Arial</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-
-                    <div class="menu__item">
-                        <select name="font-size" id="feat-font-sizes"
-                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
-                            <option value="2">2 </option>
-                            <option value="6">6 </option>
-                            <option value="8">8 </option>
-                            <option value="10">10</option>
-                            <option value="12">12</option>
-                            <option value="14">14</option>
-                            <option value="16">16</option>
-                            <option value="18">18</option>
-                            <option value="20">20</option>
-                            <option value="24">24</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Text color selection and Text Highlight color Selection -->
-                <div class="flex gap-x-3 px-3" id="feat-sec-colors">
-                    <div class="menu__item flex flex-nowrap gap-2">
-                        <input type="color" name="text-color" id="feat-text-color" class="inline-block rounded-3xl">
-                        <label for="feat-text-color" class="self-center">Font Color</label>
-                    </div>
-
-                    <div class="menu__item flex flex-nowrap gap-2">
-                        <input type="color" name="bg-color" id="feat-bg-color" class="inline-block rounded-3xl">
-                        <label for="feat-bg-color" class="self-center">Highlight Color</label>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- Text Editor -->
-            <section class="text-editor" id="feat-sec-editor">
-                <article contenteditable="true" id="feat-editor"
-                    class="min-h-[60vh] p-3 text-lg border border-blue-200 rounded-md hover:border-blue-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
-                    <p class="text-gray-400">Write an awesome article...</p>
-                </article>
-            </section>
-        </div>
-    </main>
+    <main id="root" class=" bg-blue-400 min-h-[90vh] mt-0 pt-10 pb-16"></main>
 
 
     <footer class="border-t-2 border-gray-100 text-center ">
@@ -246,6 +82,195 @@
         <button id="feat-bold"
             class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
             title="Bold"><i class="fa-solid fa-bold"></i></button>
+    </template>
+
+    <template id="template-rich-editor">
+        <div class="bg-slate-50 mx-auto -mt-28 p-5 max-w-3xl shadow-xl rounded-xl">
+            <!-- Controls -->
+            <section id="menu" class="flex flex-wrap gap-x-6 gap-y-2 my-8 text-sm text-gray-600">
+                <!-- Bold, Italic, Underline -->
+                <div id="feat-sec-biu">
+                    <!-- <button id="feat-bold"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
+                        title="Bold"><i class="fa-solid fa-bold"></i></button>
+                    <button id="feat-italic"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Italicize"><i class="fa-solid fa-italic"></i></button>
+                    <button id="feat-underline"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Underline"><i class="fa-solid fa-underline"></i></button> -->
+                </div>
+
+                <!-- Strike through, superscript, subscript -->
+                <div id="feat-sec-sss">
+                    <!-- <button id="feat-strikethrough"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                    <button id="feat-superscript"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Superscript"><i class="fa-solid fa-superscript"></i></button>
+                    <button id="feat-subscript"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Subscript"><i class="fa-solid fa-subscript"></i></button> -->
+                </div>
+
+                <!-- List ordered, List unordered -->
+                <div id="feat-sec-uo">
+                    <!-- <button id="feat-ol-list"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Ordered List"><i class="fa-solid fa-list-ol"></i></button>
+                    <button id="feat-ul-list"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Unordered List"><i class="fa-solid fa-list-ul"></i></button> -->
+                </div>
+
+                <!-- Undo and redo -->
+                <div id="feat-sec-ur">
+                    <!-- <button id="feat-undo"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+                    <button id="feat-redo"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Redo"><i class="fa-solid fa-rotate-right"></i></button> -->
+                </div>
+
+                <!-- Anchor text Add and Remove -->
+                <div class="flex" id="feat-sec-links">
+                    <div class="relative" id="insert-url">
+                        <!-- <button id="feat-insert-link"
+                            class="menu__item inline-block py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                            title="Add Link"><i class="fa-solid fa-link"></i>
+                        </button> -->
+                    </div>
+
+                    <div id="break-url">
+                        <!-- <button id="feat-break-link"
+                            class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                            title="Break Link"><i class="fa-solid fa-link-slash"></i></button> -->
+                    </div>
+                </div>
+
+
+                <!-- Align/left/center/right/justify -->
+                <div id="feat-sec-align">
+                    <!-- <button id="feat-align-left"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Align Left"><i class="fa-solid fa-align-left"></i></button>
+                    <button id="feat-align-center"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Align Center"><i class="fa-solid fa-align-center"></i></button>
+                    <button id="feat-align-right"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Align Right"><i class="fa-solid fa-align-right"></i></button>
+                    <button id="feat-align-justify"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Align Justify"><i class="fa-solid fa-align-justify"></i></button> -->
+                </div>
+
+                <!-- Indent and Outdent -->
+                <div id="feat-sec-io">
+                    <!-- <button id="feat-indent"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Indent"><i class="fa-solid fa-indent"></i></button>
+                    <button id="feat-oudent"
+                        class="menu__item py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:text-blue-600 rounded"
+                        title="Text Outdent"><i class="fa-solid fa-outdent"></i></button> -->
+                </div>
+
+                <!-- Header 1-6 Selection, Font Family Selection, Font Size Selection -->
+                <div class="flex gap-x-4" id="feat-sec-hf">
+                    <!-- <div class="menu__item">
+                        <select name="heading-level" id="feat-headings" title="Select heading level"
+                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+                            <option value="h1" default>H1</option>
+                            <option value="h2">H2</option>
+                            <option value="h3">H3</option>
+                            <option value="h4">H4</option>
+                            <option value="h5">H5</option>
+                            <option value="h6">H6</option>
+                        </select>
+                    </div>
+
+                    <div class="menu__item">
+                        <select name="font-type" id="feat-font-types" title="Select font type"
+                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+                            <option value="Arial" default>Arial</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+                    <div class="menu__item">
+                        <select name="font-size" id="feat-font-sizes"
+                            class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+                            <option value="2">2 </option>
+                            <option value="6">6 </option>
+                            <option value="8">8 </option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="14">14</option>
+                            <option value="16">16</option>
+                            <option value="18">18</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div> -->
+                </div>
+
+                <!-- Text color selection and Text Highlight color Selection -->
+                <!-- <div class="flex gap-x-3 px-3" id="feat-sec-colors">
+                    <div class="menu__item flex flex-nowrap gap-2">
+                        <input type="color" name="text-color" id="feat-text-color" class="inline-block rounded-3xl">
+                        <label for="feat-text-color" class="self-center">Font Color</label>
+                    </div>
+
+                    <div class="menu__item flex flex-nowrap gap-2">
+                        <input type="color" name="bg-color" id="feat-bg-color" class="inline-block rounded-3xl">
+                        <label for="feat-bg-color" class="self-center">Highlight Color</label>
+                    </div>
+                </div> -->
+
+            </section>
+
+            <!-- Text Editor -->
+            <section class="text-editor" id="feat-sec-editor">
+                <!-- <article contenteditable="true" id="feat-editor"
+                    class="min-h-[60vh] p-3 text-lg border border-blue-200 rounded-md hover:border-blue-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+                    <p class="text-gray-400">Write an awesome article...</p>
+                </article> -->
+            </section>
+        </div>
+    </template>
+
+    <template id="template-button">
+        <button
+            class="py-1 px-3 border border-transparent hover:border-blue-500 hover:bg-blue-100 active:focus:text-blue-600 rounded"
+            title="Bold"><i class="fa-solid"></i>
+        </button>
+    </template>
+
+    <template id="template-select">
+        <div>
+            <select
+                class="px-2 py-1 border border-blue-300 rounded hover:ring-blue-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+            </select>
+        </div>
+    </template>
+
+    <template id="template-input-color">
+        <div class="flex flex-nowrap gap-2">
+            <input type="color" class="inline-block rounded-3xl">
+            <label class="self-center"></label>
+        </div>
+    </template>
+
+    <template id="editor">
+        <article contenteditable="true" id="feat-editor"
+            class="min-h-[60vh] p-3 text-lg border border-blue-200 rounded-md hover:border-blue-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
+            <p class="text-gray-400">Write an awesome article...</p>
+        </article>
     </template>
     <!-- Scripts -->
     <script>0</script>
