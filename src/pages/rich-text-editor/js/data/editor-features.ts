@@ -149,7 +149,7 @@ const editorFeatures: ButtonsCollection = [
     type: FeatureType.BUTTON,
   },
   {
-    rootId: 'feat-sec-hf',
+    rootId: 'feat-sec-tfs',
     id: 'feat-text-option',
     title: 'Select Text Type',
     isEnabled: true,
@@ -157,7 +157,7 @@ const editorFeatures: ButtonsCollection = [
     selectOptions: ['p', 'h1', 'h2', 'h3', 'h4', 'h6'],
   },
   {
-    rootId: 'feat-sec-hf',
+    rootId: 'feat-sec-tfs',
     id: 'feat-font-types',
     title: 'Change Font',
     isEnabled: true,
@@ -165,7 +165,7 @@ const editorFeatures: ButtonsCollection = [
     selectOptions: ['Arial', 'Georgia'],
   },
   {
-    rootId: 'feat-sec-hf',
+    rootId: 'feat-sec-tfs',
     id: 'feat-font-sizes',
     title: 'Select Fontsize',
     isEnabled: true,
