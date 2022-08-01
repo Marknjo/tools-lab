@@ -29,11 +29,24 @@ class Editor
   }
 
   /// PRIVATE METHODS
-
-  private renderButtons() {
-    const getFeatures = editorFeatures.filter(
-      feat => feat.type === FeatureType.BUTTON
+  /**
+   * Get the editor features of a given type
+   * @param featureType
+   * @returns a collection of Editor features ButtonsCollection configuration
+   */
+  filterFeaturesByType(featureType: FeatureType) {
+    const filterResults = editorFeatures.filter(
+      feat => feat.type === featureType
     );
+
+    return filterResults;
+  }
+
+  /**
+   * Handles button rendering to the UI
+   */
+  private renderButtons() {
+    const getFeatures = this.filterFeaturesByType(FeatureType.BUTTON);
 
     getFeatures.forEach(btnAction => {
       new FeatureButton(btnAction);
