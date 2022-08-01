@@ -1,8 +1,7 @@
 export enum FeatureType {
   BUTTON = 'button',
   SELECT = 'select',
-  INPUT_COLOR = 'color',
-  INPUT_CHECKBOX = 'checkbox',
+  INPUT = 'input',
   EDITOR = 'editor',
 }
 
@@ -15,7 +14,11 @@ export interface FeatureButtonConfigs {
   iconType?: string;
   selectOptions?: Array<string>;
   customSelectors?: string;
-  inputOption?: { [key: string]: string | boolean | number };
+  inputOption?: InputOptions;
+}
+
+export interface InputOptions extends Partial<HTMLInputElement> {
+  labelId?: string;
 }
 
 export type ButtonsCollection = Array<FeatureButtonConfigs>;

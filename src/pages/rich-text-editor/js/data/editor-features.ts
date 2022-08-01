@@ -133,6 +133,22 @@ const editorFeatures: ButtonsCollection = [
     type: FeatureType.BUTTON,
   },
   {
+    rootId: 'feat-sec-io',
+    id: 'feat-indent',
+    iconType: 'indent',
+    title: 'Indent Text',
+    isEnabled: true,
+    type: FeatureType.BUTTON,
+  },
+  {
+    rootId: 'feat-sec-io',
+    id: 'feat-outdent',
+    iconType: 'outdent',
+    title: 'Indent Text',
+    isEnabled: true,
+    type: FeatureType.BUTTON,
+  },
+  {
     rootId: 'feat-sec-hf',
     id: 'feat-headings',
     title: 'Select Heading Type',
@@ -174,14 +190,22 @@ const editorFeatures: ButtonsCollection = [
     id: 'feat-text-color',
     title: 'Font Color',
     isEnabled: true,
-    type: FeatureType.INPUT_COLOR,
+    type: FeatureType.INPUT,
+    inputOption: {
+      type: 'color',
+      labelId: 'feat-text-color',
+    },
   },
   {
     rootId: 'feat-sec-colors',
     id: 'feat-bg-color',
     title: 'Highlight Color',
     isEnabled: true,
-    type: FeatureType.INPUT_COLOR,
+    type: FeatureType.INPUT,
+    inputOption: {
+      type: 'color',
+      labelId: 'feat-bg-color',
+    },
   },
   {
     rootId: 'feat-sec-editor',

@@ -3,6 +3,7 @@ import { ComponentConfigurables } from '../core/types/component-configurables';
 import { editorFeatures } from '../data/editor-features';
 import { FeatureType } from '../types/editor-types';
 import { FeatureButton } from './rte-feature-button';
+import { FeatureInput } from './rte-feature-input';
 
 class Editor
   extends Component<HTMLDivElement, HTMLFormElement>
@@ -24,6 +25,7 @@ class Editor
   renderConfigs() {
     /// Show editor buttons
     this.renderButtons();
+    this.renderInputEls();
 
     /// Show Editor area
   }
@@ -50,6 +52,17 @@ class Editor
 
     getFeatures.forEach(btnAction => {
       new FeatureButton(btnAction);
+    });
+  }
+
+  /**
+   * Handlers display of form input control actions to the ui
+   */
+  private renderInputEls() {
+    const configs = this.filterFeaturesByType(FeatureType.INPUT);
+
+    configs.forEach(config => {
+      new FeatureInput(config);
     });
   }
 }
