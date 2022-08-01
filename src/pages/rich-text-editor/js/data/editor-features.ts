@@ -150,11 +150,11 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-hf',
-    id: 'feat-headings',
-    title: 'Select Heading Type',
+    id: 'feat-text-option',
+    title: 'Select Text Type',
     isEnabled: true,
     type: FeatureType.SELECT,
-    selectOptions: ['h1', 'h2', 'h3', 'h4', 'h6'],
+    selectOptions: ['p', 'h1', 'h2', 'h3', 'h4', 'h6'],
   },
   {
     rootId: 'feat-sec-hf',
