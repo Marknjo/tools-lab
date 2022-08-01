@@ -22,7 +22,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-biu',
-    id: 'feat-italic',
+    id: 'feat-underline',
     iconType: 'underline',
     title: 'Underline Text',
     isEnabled: true,
