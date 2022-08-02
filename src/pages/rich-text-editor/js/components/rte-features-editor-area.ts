@@ -48,7 +48,21 @@ export class FeatureEditorArea
     );
 
     // Start Evaluation
-    if (isDefaultPara) {
+    if (isDefaultPara && defaultParaEl) {
+      const range = new Range();
+
+      const selection = window.getSelection();
+      const paraStr = defaultParaEl.childNodes[0];
+
+      range.setStart(paraStr, 0);
+
+      range.collapse(true);
+
+      selection?.removeAllRanges();
+
+      selection?.addRange(range);
+
+      defaultParaEl.focus();
     }
   }
 
