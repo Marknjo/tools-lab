@@ -5,6 +5,7 @@ import { FeatureType } from '../types/editor-types';
 import { FeatureButton } from './rte-feature-button';
 import { FeatureInput } from './rte-feature-input';
 import { FeatureSelectInput } from './rte-feature-select-input';
+import { FeatureEditorArea } from './rte-features-editor-area';
 
 class Editor
   extends Component<HTMLDivElement, HTMLFormElement>
@@ -30,6 +31,7 @@ class Editor
     this.renderSelectEls();
 
     /// Show Editor area
+    new FeatureEditorArea();
   }
 
   /// PRIVATE METHODS
@@ -78,6 +80,10 @@ class Editor
       new FeatureSelectInput(config);
     });
   }
+
+  /**
+   * Handles Rendering of the editor area
+   */
 }
 
 export default Editor;
