@@ -63,6 +63,16 @@ export class FeatureEditorArea
       selection?.addRange(range);
 
       defaultParaEl.focus();
+
+      /// Listen to click implementation
+      defaultParaEl.addEventListener('click', () => {
+        this.selectDefaultParaText(
+          defaultParaEl,
+          paraStr,
+          range,
+          selection!
+        );
+      });
     }
   }
 
@@ -79,5 +89,28 @@ export class FeatureEditorArea
       defaultParaEl &&
       defaultParaEl.textContent === this.defaultParaText
     );
+  }
+
+  /**
+   * Ensure The default text is selected
+   * @param defaultParaEl Default paragraph
+   * @param paraStr Paragraph node "text node"
+   * @param range range object handle
+   * @param selection  Selection handle
+   */
+  private selectDefaultParaText(
+    defaultParaEl: HTMLParagraphElement,
+    paraStr: Node,
+    range: Range,
+    selection: Selection
+  ): void {
+    if (defaultParaEl.id !== this.defaultParaId) return;
+
+    range.setStart(paraStr, 0);
+    range.setEnd(paraStr, (paraStr as unknown as string).length);
+
+    selection?.removeAllRanges();
+
+    selection?.addRange(range);
   }
 }
