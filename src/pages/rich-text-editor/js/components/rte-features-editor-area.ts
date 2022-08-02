@@ -73,7 +73,50 @@ export class FeatureEditorArea
           selection!
         );
       });
+
+      /// Handle removing default styles to the paragraph text
+      this.resetDefaultParaHandler(
+        defaultParaEl,
+        paraStr,
+        range,
+        selection!
+      );
     }
+  }
+
+  /**
+   * Reset the default paragraph styles when user starts to type
+   *
+   * @param defaultParaEl Default paragraph
+   * @param paraStr Paragraph node "text node"
+   * @param range range object handle
+   * @param selection  Selection handle
+   */
+  resetDefaultParaHandler(
+    defaultParaEl: HTMLParagraphElement,
+    paraStr: Node,
+    range: Range,
+    selection: Selection
+  ) {
+    let count = 0;
+    const editorArea = this.htmlEl;
+
+    editorArea.addEventListener('keydown', () => {
+      if (count == 0 && defaultParaEl.id === this.defaultParaId) {
+        /// select if not selected
+        this.selectDefaultParaText(
+          defaultParaEl,
+          paraStr,
+          range,
+          selection!
+        );
+
+        // Remove default Id and styles
+        defaultParaEl.id = '';
+        defaultParaEl.classList.remove(this.defaultParaStyle);
+      }
+      count += 1;
+    });
   }
 
   /**
