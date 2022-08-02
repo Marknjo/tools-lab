@@ -6,6 +6,13 @@ export class FeatureEditorArea
   extends Component<HTMLElement, HTMLElement>
   implements ComponentConfigurables
 {
+  /**
+   * Handle Editor Default paragraph State
+   */
+  private defaultParaText: string = 'Write an awesome article...';
+  private defaultParaStyle: string = 'text-gray-400';
+  private defaultParaId: string = 'default-p';
+
   constructor() {
     super({
       rootElId: 'feat-sec-editor-area',
@@ -13,10 +20,50 @@ export class FeatureEditorArea
       templateId: 'template-editor-area',
       insertPosition: INSERTABLE.AFTER_BEGIN,
     });
+
+    /// Configs
+    this.renderConfigs();
   }
 
   renderConfigs() {
-    // @TODO:
-    // 1. Put cursor position in the position 0 of the Write an awesome article
+    this.defaultParaHandler();
+  }
+
+  /**
+   * Handles Default Paragraph
+   *    1. Set the cursor to the start of the paragraph
+   *    2. Highlights the paragraph to start input,
+   *       making the default text behave like
+   *       placeholder text in inputs.
+   *    3. Removes default styles | id from the default paragraph
+   */
+  private defaultParaHandler() {
+    const editorArea = this.htmlEl;
+    const defaultParaEl = editorArea.querySelector('#default-p') as
+      | HTMLParagraphElement
+      | undefined;
+
+    const isDefaultPara = this.compareDefaultParagraphText(
+      defaultParaEl!
+    );
+
+    // Start Evaluation
+    if (isDefaultPara) {
+    }
+  }
+
+  /**
+   * Ensures there is a para in UI and Para text is default
+   *
+   * @param defaultParaEl Default paragraph
+   * @returns whether there is a paragraph boolean
+   */
+  private compareDefaultParagraphText(
+    defaultParaEl: HTMLParagraphElement
+  ) {
+    return (
+      defaultParaEl &&
+      defaultParaEl.textContent === this.defaultParaText
+    );
   }
 }
