@@ -144,7 +144,7 @@ const editorFeatures: ButtonsCollection = [
     rootId: 'feat-sec-io',
     id: 'feat-outdent',
     iconType: 'outdent',
-    title: 'Indent Text',
+    title: 'Outdent Text',
     isEnabled: true,
     type: FeatureType.BUTTON,
   },
