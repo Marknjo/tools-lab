@@ -9,7 +9,7 @@ export class FeatureEditorArea
   /**
    * Handle Editor Default paragraph State
    */
-  private defaultParaText: string = 'Write an awesome article...';
+  private defaultParaText: string = 'Write something awesome...';
   private defaultParaStyle: string = 'text-gray-400';
   private defaultParaId: string = 'default-p';
 
@@ -43,12 +43,10 @@ export class FeatureEditorArea
       | HTMLParagraphElement
       | undefined;
 
-    const isDefaultPara = this.compareDefaultParagraphText(
-      defaultParaEl!
-    );
-
-    // Start Evaluation
-    if (isDefaultPara && defaultParaEl) {
+    if (defaultParaEl) {
+      /// set default text
+      defaultParaEl.textContent = this.defaultParaText;
+      /// Add range
       const range = new Range();
 
       const selection = window.getSelection();
@@ -125,14 +123,14 @@ export class FeatureEditorArea
    * @param defaultParaEl Default paragraph
    * @returns whether there is a paragraph boolean
    */
-  private compareDefaultParagraphText(
-    defaultParaEl: HTMLParagraphElement
-  ) {
-    return (
-      defaultParaEl &&
-      defaultParaEl.textContent === this.defaultParaText
-    );
-  }
+  //   private compareDefaultParagraphText(
+  //     defaultParaEl: HTMLParagraphElement
+  //   ) {
+  //     return (
+  //       defaultParaEl &&
+  //       defaultParaEl.textContent === this.defaultParaText
+  //     );
+  //   }
 
   /**
    * Ensure The default text is selected
