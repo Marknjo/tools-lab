@@ -46,6 +46,8 @@ export class FeatureSelectInput
     const selectEl = this.htmlEl
       .firstElementChild as HTMLSelectElement;
 
+    selectEl.title = this.configs.title;
+
     /// configure input
     const options = this.configs.selectOptions;
     if (options && options.length > 0) {
