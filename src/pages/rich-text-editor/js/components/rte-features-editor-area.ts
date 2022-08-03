@@ -46,21 +46,9 @@ export class FeatureEditorArea
     if (defaultParaEl) {
       /// set default text
       defaultParaEl.textContent = this.defaultParaText;
-      /// Add range
-      const range = new Range();
 
-      const selection = window.getSelection();
-      const paraStr = defaultParaEl.childNodes[0];
-
-      range.setStart(paraStr, 0);
-
-      range.collapse(true);
-
-      selection?.removeAllRanges();
-
-      selection?.addRange(range);
-
-      defaultParaEl.focus();
+      const { paraStr, range, selection } =
+        this.setDefaultCursorPosition(defaultParaEl);
 
       /// Listen to click implementation
       defaultParaEl.addEventListener('click', () =>
@@ -83,6 +71,36 @@ export class FeatureEditorArea
   }
 
   /**
+   * Positions cursor to the beginning of the first paragraph
+   *
+   *  @param defaultParaEl Default paragraph
+   */
+  private setDefaultCursorPosition(
+    defaultParaEl: HTMLParagraphElement
+  ) {
+    const range = new Range();
+
+    const selection = window.getSelection();
+    const paraStr = defaultParaEl.childNodes[0];
+
+    range.setStart(paraStr, 0);
+
+    range.collapse(true);
+
+    selection?.removeAllRanges();
+
+    selection?.addRange(range);
+
+    defaultParaEl.focus();
+
+    return {
+      range,
+      selection,
+      paraStr,
+    };
+  }
+
+  /**
    * Reset the default paragraph styles when user starts to type
    *
    * @param defaultParaEl Default paragraph
@@ -90,7 +108,7 @@ export class FeatureEditorArea
    * @param range range object handle
    * @param selection  Selection handle
    */
-  resetDefaultParaHandler(
+  private resetDefaultParaHandler(
     defaultParaEl: HTMLParagraphElement,
     paraStr: Node,
     range: Range,
