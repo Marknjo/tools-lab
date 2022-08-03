@@ -63,14 +63,14 @@ export class FeatureEditorArea
       defaultParaEl.focus();
 
       /// Listen to click implementation
-      defaultParaEl.addEventListener('click', () => {
+      defaultParaEl.addEventListener('click', () =>
         this.selectDefaultParaText(
           defaultParaEl,
           paraStr,
           range,
           selection!
-        );
-      });
+        )
+      );
 
       /// Handle removing default styles to the paragraph text
       this.resetDefaultParaHandler(

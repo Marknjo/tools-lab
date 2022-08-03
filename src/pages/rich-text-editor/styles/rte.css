@@ -27,6 +27,13 @@
   p {
     @apply mb-2 text-lg;
   }
+
+  p#default-p::selection {
+    background-color: transparent;
+    color: theme('colors.gray.300');
+
+    transition: theme('transitionProperty.all');
+  }
 }
 
 @layer components {
