@@ -171,5 +171,8 @@ export class FeatureEditorArea
     selection?.removeAllRanges();
 
     selection?.addRange(range);
+
+    /// Detach the range
+    range.detach();
   }
 }
