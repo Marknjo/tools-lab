@@ -128,6 +128,15 @@ class Editor
                 range
               );
               break;
+
+            /// Underline Selected Text
+            case EditorSupportedFeatures.UNDERLINE:
+              this.textFormatterByWrapping(
+                FormatHTMLTagActions.UNDERLINE,
+                selection,
+                range
+              );
+              break;
           }
         }
 
