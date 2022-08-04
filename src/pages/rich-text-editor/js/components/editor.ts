@@ -10,11 +10,36 @@ import { FeatureInput } from './rte-feature-input';
 import { FeatureSelectInput } from './rte-feature-select-input';
 import { FeatureEditorArea } from './rte-features-editor-area';
 
+enum FormatHTMLTagActions {
+  BOLD = 'strong',
+  ITALIC = 'em',
+  UNDERLINE = 'u',
+  STRIKETHROUGH = 'strike',
+  SUPERSCRIPT = 'sup',
+  SUBSCRIPT = 'sub',
+  OL_LIST = 'ol',
+  UL_LIST = 'ul',
+  ANCHOR = 'a',
+  H1 = 'h1',
+  H2 = 'h2',
+  H3 = 'h3',
+  H4 = 'h4',
+  H5 = 'h5',
+  H6 = 'h6',
+  PARAGRAPH = 'p',
+  SECTION = 'section',
+  DIV = 'div',
+  ARTICLE = 'article',
+  ASIDE = 'aside',
+}
+
 class Editor
   extends Component<HTMLDivElement, HTMLFormElement>
   implements ComponentConfigurables
 {
   editorAreaEl: HTMLElement | undefined;
+  range: Range | undefined;
+  selection: Selection | undefined;
 
   constructor() {
     super({
@@ -40,9 +65,6 @@ class Editor
 
     /// Show Editor area
     this.renderEditorArea();
-
-    /// Handle selection
-    // this.editSelectedText();
   }
 
   effectsConfigs() {
@@ -51,6 +73,12 @@ class Editor
     // get it's description
     // change the text, if it is selected
     // You have to select the text to implement the menu action, except for the font family button
+    // this.textSelectorHandler();
+    this.formatActionsHandler();
+  }
+
+  /// PRIVATE METHODS
+  private formatActionsHandler() {
     if (this.actionsMenuEl) {
       this.actionsMenuEl.addEventListener('click', event => {
         // handle click events here to change editor section
@@ -82,11 +110,25 @@ class Editor
               break;
           }
         }
+
+        event.stopImmediatePropagation();
       });
     }
   }
 
-  /// PRIVATE METHODS
+  /**
+   * A shortcut for creating an element depending with the feature action
+   *
+   * Targets actions like Bold, Italic, underline, strike, subscript, superscript, list and anchor
+   *
+   * @param elementName String of element name
+   * @returns a crated html element
+   */
+  private el<H extends HTMLElement>(
+    elementName: FormatHTMLTagActions
+  ): H {
+    return document.createElement(elementName) as H;
+  }
 
   /**
    * Get the editor section
