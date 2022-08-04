@@ -21,6 +21,9 @@ class Editor
 
     /// Render editor
     this.renderConfigs();
+
+    /// Handle effects
+    this.effectsConfigs();
   }
 
   /**
@@ -39,7 +42,29 @@ class Editor
     // this.editSelectedText();
   }
 
+  effectsConfigs() {
+    // What is the current clicked button
+    // Get the selected menu container
+    // get it's description
+    // change the text, if it is selected
+    // You have to select the text to implement the menu action, except for the font family button
+    if (this.actionsMenuEl) {
+      this.actionsMenuEl.addEventListener('click', event => {
+        // handle click events here to change editor section
+
+        console.log(event.target);
+      });
+    }
+  }
+
   /// PRIVATE METHODS
+
+  /**
+   * Get the editor section
+   */
+  private get actionsMenuEl() {
+    return this.htmlEl.firstElementChild;
+  }
 
   /**
    * Get the editor features of a given type
