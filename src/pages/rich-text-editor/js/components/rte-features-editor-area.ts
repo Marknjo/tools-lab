@@ -29,6 +29,10 @@ export class FeatureEditorArea
     this.defaultParaHandler();
   }
 
+  get editorEl() {
+    return this.htmlEl;
+  }
+
   /**
    * Handles Default Paragraph
    *    1. Set the cursor to the start of the paragraph

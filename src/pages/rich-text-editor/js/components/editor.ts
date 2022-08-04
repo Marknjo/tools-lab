@@ -11,6 +11,8 @@ class Editor
   extends Component<HTMLDivElement, HTMLFormElement>
   implements ComponentConfigurables
 {
+  editorAreaEl: HTMLElement | undefined;
+
   constructor() {
     super({
       rootElId: 'root',
@@ -31,10 +33,14 @@ class Editor
     this.renderSelectEls();
 
     /// Show Editor area
-    new FeatureEditorArea();
+    this.renderEditorArea();
+
+    /// Handle selection
+    // this.editSelectedText();
   }
 
   /// PRIVATE METHODS
+
   /**
    * Get the editor features of a given type
    * @param featureType
@@ -46,6 +52,14 @@ class Editor
     );
 
     return filterResults;
+  }
+
+  /**
+   * Handles instantiation of the class handling displaying of the editor area
+   */
+  private renderEditorArea() {
+    const editorArea = new FeatureEditorArea();
+    this.editorAreaEl = editorArea.editorEl;
   }
 
   /**
