@@ -146,6 +146,15 @@ class Editor
                 range
               );
               break;
+
+            /// Strikethrough Selected Text
+            case EditorSupportedFeatures.SUPERSCRIPT:
+              this.textFormatterByWrapping(
+                FormatHTMLTagActions.SUPERSCRIPT,
+                selection,
+                range
+              );
+              break;
           }
         }
 
