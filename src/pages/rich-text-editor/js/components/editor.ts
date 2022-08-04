@@ -106,10 +106,17 @@ class Editor
         }
 
         if (targetAction) {
+          const selection = this.selection;
+          const range = this.range;
+
           /// handle text formatting
           switch (targetAction) {
             case EditorSupportedFeatures.BOLD:
-              console.log(targetAction);
+              this.textFormatterByWrapping(
+                FormatHTMLTagActions.BOLD,
+                selection,
+                range
+              );
 
               break;
           }
@@ -117,6 +124,52 @@ class Editor
 
         event.stopImmediatePropagation();
       });
+    }
+  }
+
+  /**
+   * Handles formatting of text given the supported html tag, range and selection
+   *
+   * Text must be selected
+   *
+   * NB: It formats a selection of text by wrapping it with a html tag
+   *
+   * @param formatAction HTML tag to surround a selected element
+   * @param selection Selection object handle
+   * @param range Range object handle
+   */
+  private textFormatterByWrapping(
+    formatAction: FormatHTMLTagActions,
+    selection: Selection | undefined,
+    range: Range | undefined
+  ) {
+    if (range && selection) {
+      // - Must know which element to select
+      const wrappingTagEl = this.el(formatAction);
+
+      let currentTagName = wrappingTagEl.tagName;
+      let parentEl = range.startContainer.parentElement;
+      let selectedTextTagName = parentEl?.nodeName;
+
+      /// Do not nest similar texts
+      if (
+        currentTagName !== selectedTextTagName &&
+        selectedTextTagName !== 'ARTICLE' // Find a way to change this
+      ) {
+        range.surroundContents(wrappingTagEl);
+        selection.addRange(range);
+      }
+
+      /// Undo Wrapping of similar tags if user tries to wrap the tag again
+      if (parentEl && currentTagName === selectedTextTagName) {
+        const parentElText = document.createTextNode(
+          parentEl.innerHTML
+        );
+        parentEl?.parentElement?.replaceChild(parentElText, parentEl);
+      }
+
+      // Release resources
+      range.detach();
     }
   }
 
