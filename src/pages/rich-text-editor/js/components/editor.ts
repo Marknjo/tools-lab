@@ -1,7 +1,10 @@
 import Component from '../core/base-component';
 import { ComponentConfigurables } from '../core/types/component-configurables';
 import { editorFeatures } from '../data/editor-features';
-import { FeatureType } from '../types/editor-types';
+import {
+  EditorSupportedFeatures,
+  FeatureType,
+} from '../types/editor-types';
 import { FeatureButton } from './rte-feature-button';
 import { FeatureInput } from './rte-feature-input';
 import { FeatureSelectInput } from './rte-feature-select-input';
@@ -51,8 +54,34 @@ class Editor
     if (this.actionsMenuEl) {
       this.actionsMenuEl.addEventListener('click', event => {
         // handle click events here to change editor section
+        // Get the target element
+        // Element must be either a button or an italicize html element
+        // Get the action name -> If Button, get from button id, if italic, reach out to the button as pare only parent element and grab it's id;
+        // Format selected text in the UI
 
-        console.log(event.target);
+        const clickedEl = event.target as HTMLElement;
+
+        let targetAction: string = '';
+
+        if (clickedEl.tagName === 'I') {
+          const btnId = clickedEl.parentElement!.id;
+          targetAction = btnId.split('-').slice(1).join('-');
+        }
+
+        if (clickedEl.tagName === 'BUTTON') {
+          const btnId = clickedEl.id;
+          targetAction = btnId.split('-').slice(1).join('-');
+        }
+
+        if (targetAction) {
+          /// handle text formatting
+          switch (targetAction) {
+            case EditorSupportedFeatures.BOLD:
+              console.log(targetAction);
+
+              break;
+          }
+        }
       });
     }
   }
