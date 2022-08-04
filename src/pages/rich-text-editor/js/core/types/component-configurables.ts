@@ -7,7 +7,7 @@ export interface ComponentConfigurables {
   /**
    * Implement A method to add side effects
    */
-  eventsConfigs?: () => void;
+  effectsConfigs?: () => void;
 
   /**
    * Sets The HTML ID
