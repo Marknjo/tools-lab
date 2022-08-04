@@ -73,11 +73,15 @@ class Editor
     // get it's description
     // change the text, if it is selected
     // You have to select the text to implement the menu action, except for the font family button
-    // this.textSelectorHandler();
+    this.textSelectorHandler();
+
     this.formatActionsHandler();
   }
 
   /// PRIVATE METHODS
+  /**
+   * Handles listening to the click event on supported menu buttons
+   */
   private formatActionsHandler() {
     if (this.actionsMenuEl) {
       this.actionsMenuEl.addEventListener('click', event => {
@@ -113,6 +117,73 @@ class Editor
 
         event.stopImmediatePropagation();
       });
+    }
+  }
+
+  /**
+   * Handles selection of a text on the screen.
+   */
+  private textSelectorHandler() {
+    if (this.editorAreaEl) {
+      const selection = window.getSelection();
+
+      // Ensure we remove ranges on pointer down
+      this.editorAreaEl.addEventListener('pointerdown', () => {
+        selection?.removeAllRanges();
+      });
+
+      this.editorAreaEl.addEventListener('pointerup', () => {
+        const text = selection?.toString();
+
+        let range = selection?.getRangeAt(0).cloneRange();
+
+        /// Do Selection job if we have the text
+        if (text && text !== '' && range && selection) {
+          /// add event listener here
+          // this.formatActionsHandler(selection, range);
+          this.range = range;
+          this.selection = selection;
+        }
+      });
+
+      /////
+      // var control = document.importNode(
+      //   document.querySelector('template').content,
+      //   true
+      // ).childNodes[0];
+
+      // control.addEventListener('pointerdown', oncontroldown, true);
+
+      // document.querySelector('p').onpointerup = () => {
+      //   let selection = document.getSelection(),
+      //     text = selection.toString();
+      // if (text !== '') {
+      //   let rect = selection.getRangeAt(0).getBoundingClientRect();
+      //   control.style.top = `calc(${rect.top}px - 48px)`;
+      //   control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 40px)`;
+      //   control['text'] = text;
+      //   document.body.appendChild(control);
+      // }
+      // };
+
+      // function oncontroldown(event) {
+      //   window.open(
+      //     `https://twitter.com/intent/tweet?text=${this.text}`
+      //   );
+      //   this.remove();
+      //   document.getSelection().removeAllRanges();
+      //   event.stopPropagation();
+      // }
+
+      // document.onpointerdown = () => {
+      //   let control = document.querySelector('#control');
+      //   if (control !== null) {
+      //     control.remove();
+      //     document.getSelection().removeAllRanges();
+      //   }
+      // };
+
+      ////////////////////////////////
     }
   }
 
