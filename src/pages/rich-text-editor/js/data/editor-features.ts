@@ -1,12 +1,13 @@
 import {
   ButtonsCollection,
+  EditorSupportedFeatures,
   FeatureType,
 } from '../types/editor-types';
 
 const editorFeatures: ButtonsCollection = [
   {
     rootId: 'feat-sec-biu',
-    id: 'feat-bold',
+    id: EditorSupportedFeatures.BOLD,
     iconType: 'bold',
     title: 'Text Bold',
     isEnabled: true,
@@ -14,7 +15,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-biu',
-    id: 'feat-italic',
+    id: EditorSupportedFeatures.ITALICIZE,
     iconType: 'italic',
     title: 'Italicize Text',
     isEnabled: true,
@@ -22,7 +23,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-biu',
-    id: 'feat-underline',
+    id: EditorSupportedFeatures.UNDERLINE,
     iconType: 'underline',
     title: 'Underline Text',
     isEnabled: true,
@@ -30,7 +31,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-sss',
-    id: 'feat-strikethrough',
+    id: EditorSupportedFeatures.STRIKETHROUGH,
     iconType: 'strikethrough',
     title: 'Strikethrough',
     isEnabled: true,
@@ -38,7 +39,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-sss',
-    id: 'feat-superscript',
+    id: EditorSupportedFeatures.SUPERSCRIPT,
     iconType: 'superscript',
     title: 'Superscript',
     isEnabled: true,
@@ -46,7 +47,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-sss',
-    id: 'feat-subscript',
+    id: EditorSupportedFeatures.SUBSCRIPT,
     iconType: 'subscript',
     title: 'Subscript',
     isEnabled: true,
@@ -54,7 +55,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-uo',
-    id: 'feat-ol-list',
+    id: EditorSupportedFeatures.OL_LIST,
     iconType: 'list-ol',
     title: 'Ordered List',
     isEnabled: true,
@@ -62,7 +63,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-uo',
-    id: 'feat-ul-list',
+    id: EditorSupportedFeatures.UL_LIST,
     iconType: 'list-ul',
     title: 'Unordered List',
     isEnabled: true,
@@ -70,7 +71,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-ur',
-    id: 'feat-undo',
+    id: EditorSupportedFeatures.UNDO,
     iconType: 'rotate-left',
     title: 'Undo changes',
     isEnabled: true,
@@ -78,7 +79,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-ur',
-    id: 'feat-redo',
+    id: EditorSupportedFeatures.REDO,
     iconType: 'rotate-right',
     title: 'Redo changes',
     isEnabled: true,
@@ -86,7 +87,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'insert-url',
-    id: 'feat-insert-link',
+    id: EditorSupportedFeatures.INSERT_LINK,
     iconType: 'link',
     title: 'Add Link',
     isEnabled: true,
@@ -94,7 +95,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'break-url',
-    id: 'feat-break-link',
+    id: EditorSupportedFeatures.BREAK_LINK,
     iconType: 'link-slash',
     title: 'Break Link',
     isEnabled: true,
@@ -102,7 +103,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-align',
-    id: 'feat-align-left',
+    id: EditorSupportedFeatures.ALIGN_LEFT,
     iconType: 'align-left',
     title: 'Text Align Left',
     isEnabled: true,
@@ -110,7 +111,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-align',
-    id: 'feat-align-center',
+    id: EditorSupportedFeatures.ALIGN_CENTER,
     iconType: 'align-center',
     title: 'Text Align Center',
     isEnabled: true,
@@ -118,7 +119,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-align',
-    id: 'feat-align-right',
+    id: EditorSupportedFeatures.ALIGN_RIGHT,
     iconType: 'align-right',
     title: 'Text Align Right',
     isEnabled: true,
@@ -126,7 +127,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-align',
-    id: 'feat-justify',
+    id: EditorSupportedFeatures.ALIGN_JUSTIFy,
     iconType: 'align-justify',
     title: 'Text Align Justify',
     isEnabled: true,
@@ -134,7 +135,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-io',
-    id: 'feat-indent',
+    id: EditorSupportedFeatures.INDENT,
     iconType: 'indent',
     title: 'Indent Text',
     isEnabled: true,
@@ -142,7 +143,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-io',
-    id: 'feat-outdent',
+    id: EditorSupportedFeatures.OUTDENT,
     iconType: 'outdent',
     title: 'Outdent Text',
     isEnabled: true,
@@ -150,23 +151,24 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-tfs',
-    id: 'feat-text-option',
-    title: 'Select Text Type',
+    id: EditorSupportedFeatures.HEADINGS,
+    title: 'Make Selected Text a Heading',
     isEnabled: true,
     type: FeatureType.SELECT,
-    selectOptions: ['p', 'h1', 'h2', 'h3', 'h4', 'h6'],
+    selectOptions: ['h1', 'h2', 'h3', 'h4', 'h5'],
   },
   {
+    // To be applied globally or per parent tag
     rootId: 'feat-sec-tfs',
-    id: 'feat-font-types',
-    title: 'Change Font',
+    id: EditorSupportedFeatures.FONT_FAMILY,
+    title: 'Change font family',
     isEnabled: true,
     type: FeatureType.SELECT,
     selectOptions: ['Arial', 'Georgia'],
   },
   {
     rootId: 'feat-sec-tfs',
-    id: 'feat-font-sizes',
+    id: EditorSupportedFeatures.FONT_SIZE,
     title: 'Select Fontsize',
     isEnabled: true,
     type: FeatureType.SELECT,
@@ -186,31 +188,39 @@ const editorFeatures: ButtonsCollection = [
     ],
   },
   {
+    rootId: 'feat-sec-tfs',
+    id: EditorSupportedFeatures.SWAP_TAG,
+    title: 'Swap parent tag with',
+    isEnabled: true,
+    type: FeatureType.SELECT,
+    selectOptions: ['p', 'div', 'section', 'article', 'aside'],
+  },
+  {
     rootId: 'feat-sec-colors',
-    id: 'feat-text-color',
-    title: 'Font Color',
+    id: EditorSupportedFeatures.FONT_COLOR,
+    title: 'Change Font Color',
     isEnabled: true,
     type: FeatureType.INPUT,
     inputOption: {
       type: 'color',
-      labelId: 'feat-text-color',
+      labelId: EditorSupportedFeatures.FONT_COLOR,
     },
   },
   {
     rootId: 'feat-sec-colors',
-    id: 'feat-bg-color',
-    title: 'Highlight Color',
+    id: EditorSupportedFeatures.FONT_BACKGROUND_COLOR,
+    title: 'Background Color',
     isEnabled: true,
     type: FeatureType.INPUT,
     inputOption: {
       type: 'color',
-      labelId: 'feat-bg-color',
+      labelId: EditorSupportedFeatures.FONT_BACKGROUND_COLOR,
     },
   },
   {
     rootId: 'feat-sec-editor',
-    id: 'feat-editor',
-    title: 'Editor',
+    id: EditorSupportedFeatures.EDITOR_AREA,
+    title: 'Editor Area',
     isEnabled: true,
     type: FeatureType.EDITOR,
   },

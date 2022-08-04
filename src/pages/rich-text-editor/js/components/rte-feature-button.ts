@@ -10,7 +10,7 @@ export class FeatureButton
   constructor(private configs: FeatureButtonConfigs) {
     super({
       rootElId: configs.rootId,
-      htmlElId: configs.id,
+      htmlElId: `feat-${configs.id}`,
       templateId: 'template-feature-btn',
       insertPosition: INSERTABLE.BEFORE_END,
     });

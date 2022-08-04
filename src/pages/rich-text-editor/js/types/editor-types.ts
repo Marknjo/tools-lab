@@ -5,8 +5,36 @@ export enum FeatureType {
   EDITOR = 'editor',
 }
 
+export enum EditorSupportedFeatures {
+  BOLD = 'bold',
+  ITALICIZE = 'italic',
+  UNDERLINE = 'underline',
+  STRIKETHROUGH = 'strikethrough',
+  SUPERSCRIPT = 'superscript',
+  SUBSCRIPT = 'subscript',
+  OL_LIST = 'ol-list',
+  UL_LIST = 'ul-list',
+  UNDO = 'undo',
+  REDO = 'redo',
+  INSERT_LINK = 'insert-link',
+  BREAK_LINK = 'break-link',
+  ALIGN_LEFT = 'align-left',
+  ALIGN_RIGHT = 'align-right',
+  ALIGN_CENTER = 'align-center',
+  ALIGN_JUSTIFy = 'align-justify',
+  INDENT = 'indent',
+  OUTDENT = 'outdent',
+  SWAP_TAG = 'swap-tag',
+  HEADINGS = 'headings',
+  FONT_FAMILY = 'font-family',
+  FONT_SIZE = 'font-size',
+  FONT_COLOR = 'font-color',
+  FONT_BACKGROUND_COLOR = 'font-background-color',
+  EDITOR_AREA = 'editor-area',
+}
+
 export interface FeatureButtonConfigs {
-  id: string;
+  id: EditorSupportedFeatures;
   title: string;
   rootId: string;
   isEnabled: boolean;

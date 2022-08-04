@@ -1,7 +1,10 @@
 import Component from '../core/base-component';
 import { ComponentConfigurables } from '../core/types/component-configurables';
 import { INSERTABLE } from '../core/types/insert-positions';
-import { FeatureButtonConfigs } from '../types/editor-types';
+import {
+  EditorSupportedFeatures,
+  FeatureButtonConfigs,
+} from '../types/editor-types';
 
 export class FeatureSelectInput
   extends Component<HTMLDivElement, HTMLDivElement>
@@ -12,6 +15,7 @@ export class FeatureSelectInput
     'Times Roman',
     'Georgia',
   ];
+
   defaultFontSizes: Array<string> = [
     '8',
     '10',
@@ -30,7 +34,7 @@ export class FeatureSelectInput
   constructor(private configs: FeatureButtonConfigs) {
     super({
       rootElId: configs.rootId,
-      htmlElId: configs.id,
+      htmlElId: `${configs.id}-container`,
       templateId: 'template-select',
       insertPosition: INSERTABLE.BEFORE_END,
     });
@@ -47,6 +51,7 @@ export class FeatureSelectInput
       .firstElementChild as HTMLSelectElement;
 
     selectEl.title = this.configs.title;
+    selectEl.id = `feat-${this.configs.id}`;
 
     /// configure input
     const options = this.configs.selectOptions;
@@ -56,7 +61,7 @@ export class FeatureSelectInput
 
     // get options configs
     switch (this.configs.id) {
-      case 'feat-font-types':
+      case EditorSupportedFeatures.FONT_FAMILY:
         this.configs.selectOptions ||
           this.configureSelectOptions(
             selectEl,
@@ -64,7 +69,7 @@ export class FeatureSelectInput
           );
         break;
 
-      case 'feat-font-sizes':
+      case EditorSupportedFeatures.FONT_SIZE:
         this.configs.selectOptions ||
           this.configureSelectOptions(
             selectEl,

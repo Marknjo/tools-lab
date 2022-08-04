@@ -10,7 +10,7 @@ export class FeatureInput
   constructor(private configs: FeatureButtonConfigs) {
     super({
       rootElId: configs.rootId,
-      htmlElId: configs.id,
+      htmlElId: `feat-${configs.id}`,
       templateId: 'template-input',
       insertPosition: INSERTABLE.BEFORE_END,
     });
