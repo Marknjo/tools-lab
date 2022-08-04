@@ -147,10 +147,19 @@ class Editor
               );
               break;
 
-            /// Strikethrough Selected Text
+            /// Superscript Selected Text
             case EditorSupportedFeatures.SUPERSCRIPT:
               this.textFormatterByWrapping(
                 FormatHTMLTagActions.SUPERSCRIPT,
+                selection,
+                range
+              );
+              break;
+
+            /// Subscript Selected Text
+            case EditorSupportedFeatures.SUBSCRIPT:
+              this.textFormatterByWrapping(
+                FormatHTMLTagActions.SUBSCRIPT,
                 selection,
                 range
               );
