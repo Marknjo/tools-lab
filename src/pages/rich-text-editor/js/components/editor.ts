@@ -111,13 +111,22 @@ class Editor
 
           /// handle text formatting
           switch (targetAction) {
+            /// Bold Selected Text
             case EditorSupportedFeatures.BOLD:
               this.textFormatterByWrapping(
                 FormatHTMLTagActions.BOLD,
                 selection,
                 range
               );
+              break;
 
+            /// Italicize Selected Text
+            case EditorSupportedFeatures.ITALICIZE:
+              this.textFormatterByWrapping(
+                FormatHTMLTagActions.ITALIC,
+                selection,
+                range
+              );
               break;
           }
         }
