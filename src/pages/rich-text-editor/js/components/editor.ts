@@ -251,6 +251,9 @@ class Editor
       if (currentEl.id === editorAreaElId && prevEls.length > 1) {
         const parentEl = prevEls.at(-2) as HTMLElement;
 
+        /// Ensure there are no duplicate Alignment styles
+        this.removeDuplicateAlignStyles(parentEl, className);
+
         /// Toggling/Applying multiple css styles
         if (className.includes(',')) {
           const styleFormatters = className.split(',');
@@ -321,6 +324,43 @@ class Editor
 
       // Release resources
       range.detach();
+    }
+  }
+
+  /**
+   * Ensures a parent element does not have duplicate align styles
+   * @param parentEl A parent element to lookup the duplicate css styles
+   * @param className a string of comma separated strings
+   */
+  private removeDuplicateAlignStyles(
+    parentEl: HTMLElement,
+    className: string
+  ) {
+    /**
+     * Text Align Based on Tailwind
+     */
+    const alignTextAttr = [
+      'text-left',
+      'text-center',
+      'text-right',
+      'text-justify',
+      'text-start',
+      'text-end',
+    ];
+
+    // const parentElStyles = parentEl.getAttribute('class');
+    let parentElStyles = parentEl.classList.value;
+
+    const duplicateAlignStyle = parentElStyles
+      .split(' ')
+      .find(style => alignTextAttr.includes(style));
+
+    /// Remove previous added align attribute before proceeding
+    if (
+      duplicateAlignStyle &&
+      !className.split(',').includes(duplicateAlignStyle)
+    ) {
+      parentEl.classList.remove(duplicateAlignStyle);
     }
   }
 
