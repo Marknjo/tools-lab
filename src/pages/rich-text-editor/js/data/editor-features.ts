@@ -127,7 +127,7 @@ const editorFeatures: ButtonsCollection = [
   },
   {
     rootId: 'feat-sec-align',
-    id: EditorSupportedFeatures.ALIGN_JUSTIFy,
+    id: EditorSupportedFeatures.ALIGN_JUSTIFY,
     iconType: 'align-justify',
     title: 'Text Align Justify',
     isEnabled: true,

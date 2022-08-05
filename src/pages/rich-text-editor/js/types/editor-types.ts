@@ -21,7 +21,7 @@ export enum EditorSupportedFeatures {
   ALIGN_LEFT = 'align-left',
   ALIGN_RIGHT = 'align-right',
   ALIGN_CENTER = 'align-center',
-  ALIGN_JUSTIFy = 'align-justify',
+  ALIGN_JUSTIFY = 'align-justify',
   INDENT = 'indent',
   OUTDENT = 'outdent',
   SWAP_TAG = 'swap-tag',

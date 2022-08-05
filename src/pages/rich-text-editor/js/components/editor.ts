@@ -166,9 +166,24 @@ class Editor
               );
               break;
 
-            /// Subscript Selected Text
+            /// Align Selected Text to left
             case EditorSupportedFeatures.ALIGN_LEFT:
               this.cssStylesFormatter(range, 'text-left');
+              break;
+
+            /// Align Selected Text to center
+            case EditorSupportedFeatures.ALIGN_CENTER:
+              this.cssStylesFormatter(range, 'text-center');
+              break;
+
+            /// Align Selected Text to right
+            case EditorSupportedFeatures.ALIGN_RIGHT:
+              this.cssStylesFormatter(range, 'text-right');
+              break;
+
+            /// Align Selected Text to JUSTIFY
+            case EditorSupportedFeatures.ALIGN_JUSTIFY:
+              this.cssStylesFormatter(range, 'text-justify');
               break;
           }
         }
