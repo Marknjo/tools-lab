@@ -105,7 +105,8 @@ class Editor
           targetAction = btnId.split('-').slice(1).join('-');
         }
 
-        if (targetAction) {
+        /// @TODO: Add notification if a user clicks the action menu without selecting a string
+        if (targetAction && this.range) {
           const selection = this.selection;
           const range = this.range;
 
@@ -167,6 +168,11 @@ class Editor
           }
         }
 
+        if (!this.range) {
+          console.log(
+            'Error: select some text in the editor to format '
+          );
+        }
         event.stopImmediatePropagation();
       });
     }
