@@ -165,6 +165,11 @@ class Editor
                 range
               );
               break;
+
+            /// Subscript Selected Text
+            case EditorSupportedFeatures.ALIGN_LEFT:
+              this.cssStylesFormatter(range, 'text-left');
+              break;
           }
         }
 
@@ -176,6 +181,86 @@ class Editor
         event.stopImmediatePropagation();
       });
     }
+  }
+
+  /**
+   * Adds a css style (Tailwind class) to the top most element
+   * i.e. A paragraph, a sibling to the editor root element (Article tag)
+   *
+   * @TODO: Implement other look up elements i.e. div, section, article, aside,
+   * dialog, or li, dl, or even table
+   *
+   * @param range Range object handle
+   * @param className a string of comma separated strings
+   *
+   */
+  private cssStylesFormatter(range: Range, className: string) {
+    if (!range)
+      return console.log(
+        'Error: select some text in the editor to format'
+      );
+    if (className === '' && typeof className !== 'string')
+      return console.log(
+        'Error: Must provide a valid class name to format the selected text'
+      );
+
+    const selectedEl = range.startContainer.parentElement;
+
+    if (!selectedEl)
+      return console.log(
+        'Error: select some text in the editor to format'
+      );
+
+    let prevEls: HTMLElement[] = [];
+
+    /**
+     * Recursive transverse the DOM to the parent element
+     *
+     * Responsible of toggling a css style (class name) to the parent element
+     *
+     * @param currentEl html element currently the method is checking
+     */
+    const isEditorEl = (currentEl: HTMLElement) => {
+      prevEls.push(currentEl);
+
+      const editorAreaElId = this.editorAreaEl!.id;
+
+      /// Recursive transverse the DOM to the parent element
+      if (
+        currentEl.parentElement &&
+        currentEl.id !== editorAreaElId
+      ) {
+        isEditorEl(currentEl.parentElement);
+      }
+
+      if (currentEl.id === editorAreaElId && prevEls.length > 1) {
+        const parentEl = prevEls.at(-2) as HTMLElement;
+
+        /// Toggling/Applying multiple css styles
+        if (className.includes(',')) {
+          const styleFormatters = className.split(',');
+
+          styleFormatters.forEach(cssStyle => {
+            /// Remove a style if it is already there
+            if (parentEl.classList.contains(cssStyle)) {
+              parentEl.classList.remove(cssStyle);
+            } else {
+              // Add a style if not there
+              parentEl.classList.add(cssStyle);
+            }
+          });
+        }
+
+        /// Toggling/Applying only a single class name
+        if (!className.includes(',')) {
+          parentEl.classList.toggle(className);
+        }
+
+        prevEls = [];
+      }
+    };
+
+    isEditorEl(selectedEl);
   }
 
   /**
