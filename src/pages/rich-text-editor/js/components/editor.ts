@@ -185,6 +185,14 @@ class Editor
             case EditorSupportedFeatures.ALIGN_JUSTIFY:
               this.cssStylesFormatter(range, 'text-justify');
               break;
+
+            /// Indent Selected Text
+            case EditorSupportedFeatures.INDENT:
+              this.cssStylesFormatter(
+                range,
+                EditorSupportedFeatures.INDENT
+              );
+              break;
           }
         }
 
@@ -255,7 +263,12 @@ class Editor
         this.removeDuplicateAlignStyles(parentEl, className);
 
         /// Toggling/Applying multiple css styles
-        if (className.includes(',')) {
+        if (
+          (className.includes(',') &&
+            className !== EditorSupportedFeatures.INDENT) ||
+          (className.includes(',') &&
+            className !== EditorSupportedFeatures.OUTDENT)
+        ) {
           const styleFormatters = className.split(',');
 
           styleFormatters.forEach(cssStyle => {
@@ -270,11 +283,21 @@ class Editor
         }
 
         /// Toggling/Applying only a single class name
-        if (!className.includes(',')) {
+        if (
+          !className.includes(',') &&
+          className !== EditorSupportedFeatures.INDENT &&
+          className !== EditorSupportedFeatures.OUTDENT
+        ) {
           parentEl.classList.toggle(className);
         }
 
-        prevEls = [];
+        /// Handling indentation
+        const prevElsReset = this.indentSelectedText(
+          parentEl,
+          className
+        );
+
+        prevEls = prevElsReset || [];
       }
     };
 
@@ -325,6 +348,62 @@ class Editor
       // Release resources
       range.detach();
     }
+  }
+
+  /**
+   * Handles indent/Outdent of selected paragraph
+   * @param parentEl A parent element to lookup the duplicate css styles
+   * @param className a string of comma separated strings
+   */
+  indentSelectedText(parentEl: HTMLElement, className: string) {
+    const indentationSupportedLevels = [2, 4, 8, 12, 14, 16, 20];
+
+    const parentElStyles = parentEl.getAttribute('class');
+    /// Add first indentation level
+    if (!parentElStyles || parentElStyles === '') {
+      parentEl.classList.add('indent-2');
+      return [];
+    }
+
+    /// Already there are some styles, even if it's not indentation
+
+    const indentStyles = parentElStyles
+      .split(' ')
+      .find(style => style.includes('indent')) as undefined | string;
+
+    /// Add first level indentation
+    if (
+      !indentStyles &&
+      className === EditorSupportedFeatures.INDENT
+    ) {
+      parentEl.classList.add('indent-2');
+      return [];
+    }
+
+    /// Already an indentation style
+
+    let [indentStr, indentLevel] = indentStyles!.split('-');
+
+    /// Stop processing if max supported indentation level reached
+    if (
+      indentationSupportedLevels.at(-1) === parseInt(indentLevel, 10)
+    ) {
+      return [];
+    }
+
+    const foundIdx = indentationSupportedLevels.findIndex(
+      level => level === parseInt(indentLevel, 10)
+    );
+
+    if (foundIdx > -1) {
+      /// Handle adding the next indentation level
+      const nextIdx = indentationSupportedLevels.at(foundIdx + 1);
+
+      parentEl.classList.remove(indentStyles!);
+      parentEl.classList.add(`${indentStr}-${nextIdx}`);
+    }
+
+    return [];
   }
 
   /**
