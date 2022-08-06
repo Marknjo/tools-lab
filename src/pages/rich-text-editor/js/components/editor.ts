@@ -38,8 +38,13 @@ class Editor
   implements ComponentConfigurables
 {
   editorAreaEl: HTMLElement | undefined;
+
+  /**
+   * Properties to handle section
+   */
   range: Range | undefined;
   selection: Selection | undefined;
+  plainSelectedText: string | undefined;
 
   /**
    * Based on TailwindCSS
@@ -578,6 +583,8 @@ class Editor
 
         /// Do Selection job if we have the text
         if (text && text !== '' && range && selection) {
+          this.plainSelectedText = text;
+
           /// add event listener here
           // this.formatActionsHandler(selection, range);
           this.range = range;
@@ -624,6 +631,22 @@ class Editor
 
       ////////////////////////////////
     }
+  }
+
+  /**
+   *
+   * Transform the selected text to a collection of strings
+   *
+   * @param selectedText
+   * @returns
+   */
+  private selectedTextCollection(selectedText: string) {
+    console.log(selectedText);
+
+    return selectedText
+      .split('\n')
+      .filter(text => text !== '')
+      .map(text => text.trim());
   }
 
   /**
