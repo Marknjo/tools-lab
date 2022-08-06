@@ -41,6 +41,17 @@ class Editor
   range: Range | undefined;
   selection: Selection | undefined;
 
+  /**
+   * Based on TailwindCSS
+   *
+   * @NOTE: Must add html template for both outdent or
+   * negative indents and positive indent so that
+   * tailwind can add the styles during compiling
+   */
+  supportedIndentationSizes: Array<number> = [
+    2, 4, 8, 12, 14, 16, 20,
+  ];
+
   constructor() {
     super({
       rootElId: 'root',
@@ -193,6 +204,14 @@ class Editor
                 EditorSupportedFeatures.INDENT
               );
               break;
+
+            /// Outdent Selected Text
+            case EditorSupportedFeatures.OUTDENT:
+              this.cssStylesFormatter(
+                range,
+                EditorSupportedFeatures.OUTDENT
+              );
+              break;
           }
         }
 
@@ -264,10 +283,9 @@ class Editor
 
         /// Toggling/Applying multiple css styles
         if (
-          (className.includes(',') &&
-            className !== EditorSupportedFeatures.INDENT) ||
-          (className.includes(',') &&
-            className !== EditorSupportedFeatures.OUTDENT)
+          className.includes(',') &&
+          className !== EditorSupportedFeatures.INDENT &&
+          className !== EditorSupportedFeatures.OUTDENT
         ) {
           const styleFormatters = className.split(',');
 
@@ -291,11 +309,14 @@ class Editor
           parentEl.classList.toggle(className);
         }
 
+        let prevElsReset: any[] = [];
         /// Handling indentation
-        const prevElsReset = this.indentSelectedText(
-          parentEl,
-          className
-        );
+        if (
+          className === EditorSupportedFeatures.INDENT ||
+          className === EditorSupportedFeatures.OUTDENT
+        ) {
+          prevElsReset = this.indentSelectedText(parentEl, className);
+        }
 
         prevEls = prevElsReset || [];
       }
@@ -309,7 +330,8 @@ class Editor
    *
    * Text must be selected
    *
-   * NB: It formats a selection of text by wrapping it with a html tag
+   * @NOTE: It formats a selection of text by wrapping it with a html tag
+   *
    *
    * @param formatAction HTML tag to surround a selected element
    * @param selection Selection object handle
@@ -351,58 +373,152 @@ class Editor
   }
 
   /**
-   * Handles indent/Outdent of selected paragraph
+   * Handles indent/Outdent of selected Text
+   *
+   * @TODO: The method is long with many help methods,
+   * can be extracted to it's own utility class
+   *
    * @param parentEl A parent element to lookup the duplicate css styles
    * @param className a string of comma separated strings
    */
-  indentSelectedText(parentEl: HTMLElement, className: string) {
-    const indentationSupportedLevels = [2, 4, 8, 12, 14, 16, 20];
+  indentSelectedText(parentEl: HTMLElement, className: string): [] {
+    const indentationSupportedLevels = this.supportedIndentationSizes;
 
     const parentElStyles = parentEl.getAttribute('class');
-    /// Add first indentation level
+
+    const isIndentAction =
+      className === EditorSupportedFeatures.INDENT;
+    const isOutdentAction =
+      className === EditorSupportedFeatures.OUTDENT;
+
+    /// Add first indentation level, if none
     if (!parentElStyles || parentElStyles === '') {
-      parentEl.classList.add('indent-2');
+      const defaultClassName = isIndentAction
+        ? 'indent-2'
+        : '-indent-2';
+
+      parentEl.classList.add(defaultClassName);
       return [];
     }
 
-    /// Already there are some styles, even if it's not indentation
+    /**
+     * Finds which indentation style is applied (positive | negative)
+     * based on styles applied to the parent element
+     *
+     * @param styleType negative indent or positive indent
+     * @returns found indentation type
+     */
+    const getAppliedIndentStyle = (
+      styleType: string
+    ): undefined | string => {
+      return (
+        parentElStyles &&
+        parentElStyles
+          .split(' ')
+          .find(style => style.startsWith(styleType))
+      );
+    };
 
-    const indentStyles = parentElStyles
-      .split(' ')
-      .find(style => style.includes('indent')) as undefined | string;
-
-    /// Add first level indentation
-    if (
-      !indentStyles &&
-      className === EditorSupportedFeatures.INDENT
-    ) {
-      parentEl.classList.add('indent-2');
-      return [];
-    }
+    /// Find applied style
+    const appliedIndentStyle =
+      getAppliedIndentStyle('indent') ||
+      getAppliedIndentStyle('-indent');
 
     /// Already an indentation style
+    /**
+     * A helper method to split indent style to a digit
+     * and a the indentation type (Positive | Negative)
+     *
+     * @returns A collection of applied styles
+     */
+    const splitIndentClassName = function () {
+      let collection = appliedIndentStyle!.split(
+        '-'
+      ) as Array<string>;
 
-    let [indentStr, indentLevel] = indentStyles!.split('-');
+      if (collection.length === 3) {
+        const indentStr = `-${collection.at(1)}`;
+        collection = [indentStr, collection[2]];
+      }
 
-    /// Stop processing if max supported indentation level reached
-    if (
-      indentationSupportedLevels.at(-1) === parseInt(indentLevel, 10)
-    ) {
+      return collection;
+    };
+
+    /// Get the indentation string and the level
+    let [indentationType, indentSize] = splitIndentClassName();
+
+    /// Finds the applied size index in the supported indentation collection
+    const foundIdx = indentationSupportedLevels.findIndex(
+      level => level === parseInt(indentSize, 10)
+    );
+
+    // A Guard to prevent further processing if there is no existing index
+    if (foundIdx === -1) {
+      /// @TODO: unsupported index throw error
       return [];
     }
 
-    const foundIdx = indentationSupportedLevels.findIndex(
-      level => level === parseInt(indentLevel, 10)
-    );
+    /**
+     * Helper action to determine if the applied style size
+     * is not the last item of the supported sizes
+     */
+    const isNotLastIdx =
+      indentationSupportedLevels.at(-1) !== parseInt(indentSize, 10);
 
-    if (foundIdx > -1) {
-      /// Handle adding the next indentation level
-      const nextIdx = indentationSupportedLevels.at(foundIdx + 1);
+    /// Determine the next and previous supported sizes
+    const nextSupportedSize = indentationSupportedLevels.at(
+      foundIdx + 1
+    )!;
+    const prevSupportedSize = indentationSupportedLevels.at(
+      foundIdx === 0 ? 0 : foundIdx - 1
+    )!;
 
-      parentEl.classList.remove(indentStyles!);
-      parentEl.classList.add(`${indentStr}-${nextIdx}`);
+    /// Ensures existing style is removed before appending a new style
+    if (isNotLastIdx) {
+      parentEl.classList.remove(appliedIndentStyle!);
     }
 
+    /**
+     * A helper method to add the indentation style to the parent element
+     * @param indentSize Previous or next supported indentation size
+     */
+    const addClass = (indentSize: number) => {
+      parentEl.classList.add(`${indentationType}-${indentSize}`);
+    };
+
+    /// Increment indent if action is also indent|outdent
+    if (
+      (indentationType.startsWith('indent') &&
+        isIndentAction &&
+        isNotLastIdx) ||
+      (indentationType.startsWith('-indent') &&
+        isOutdentAction &&
+        isNotLastIdx)
+    ) {
+      addClass(nextSupportedSize);
+      return [];
+    }
+
+    /// Reduce/or move indentation on the opposite direction based the existing indentation type
+    if (
+      (indentationType.startsWith('indent') && isOutdentAction) ||
+      (indentationType.startsWith('-indent') && isIndentAction)
+    ) {
+      // First remove existing indentation
+      parentEl.classList.remove(appliedIndentStyle!);
+
+      /// handle Case where found index is zero, reset the indentation
+      if (foundIdx === 0) {
+        parentEl.classList.remove(appliedIndentStyle!);
+        return [];
+      }
+
+      /// Handle decrement of the indentation
+      addClass(prevSupportedSize);
+      return [];
+    }
+
+    // Reset parent element
     return [];
   }
 
