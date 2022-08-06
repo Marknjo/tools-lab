@@ -92,9 +92,60 @@ class Editor
     this.textSelectorHandler();
 
     this.formatActionsHandler();
+
+    this.selectionInputsHandler();
   }
 
   /// PRIVATE METHODS
+
+  private selectionInputsHandler() {
+    /**
+     * @TODO:
+     *   - Get the selected input
+     *   - Listen to changes and update the UI based on the selection
+     *   - First implement Headings, replace parent tag with heading elements,
+     *   - must be aware of the parent tag, replace p, and wrap text if the parent is a layout element
+     *   - Supported HTML element wrappers (p, div, and the rest)
+     *   - Handle fonts updates per selected element, use CSS over font tag
+     *   - handle Font sizes update -> using CSS, remove or add a font
+     *
+     */
+
+    if (this.actionsMenuEl) {
+      this.actionsMenuEl.addEventListener('change', event => {
+        const targetSelectionEl =
+          event.target as HTMLSelectElement | null;
+
+        /// Guard clauses
+        // Do not proceed if not target element
+        if (!targetSelectionEl) {
+          return;
+        }
+
+        /// Do not proceed if target element is not a select input
+        if (targetSelectionEl.nodeName !== 'SELECT') {
+          return;
+        }
+
+        const targetAction = targetSelectionEl.id
+          .split('-')
+          .slice(1)
+          .join('-');
+
+        /// Handle different selection actions based on their id type
+        switch (targetAction) {
+          case EditorSupportedFeatures.HEADINGS:
+            console.log({
+              targetAction,
+              value: targetSelectionEl.value,
+            });
+
+            break;
+        }
+      });
+    }
+  }
+
   /**
    * Handles listening to the click event on supported menu buttons
    */
@@ -220,11 +271,11 @@ class Editor
           }
         }
 
-        if (!this.range) {
-          console.log(
-            'Error: select some text in the editor to format '
-          );
-        }
+        // if (!this.range) {
+        //   console.log(
+        //     'Error: select some text in the editor to format '
+        //   );
+        // }
         event.stopImmediatePropagation();
       });
     }
