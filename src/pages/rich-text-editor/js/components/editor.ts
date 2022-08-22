@@ -57,6 +57,11 @@ class Editor
     2, 4, 8, 12, 14, 16, 20,
   ];
 
+  /**
+   * Traversed Elements Collection
+   */
+  traversedEls: HTMLElement[] = [];
+
   constructor() {
     super({
       rootElId: 'root',
@@ -297,6 +302,7 @@ class Editor
       return console.log(
         'Error: select some text in the editor to format'
       );
+
     if (className === '' && typeof className !== 'string')
       return console.log(
         'Error: Must provide a valid class name to format the selected text'
@@ -309,76 +315,107 @@ class Editor
         'Error: select some text in the editor to format'
       );
 
-    let prevEls: HTMLElement[] = [];
-
-    /**
-     * Recursive transverse the DOM to the parent element
-     *
-     * Responsible of toggling a css style (class name) to the parent element
-     *
-     * @param currentEl html element currently the method is checking
-     */
-    const isEditorEl = (currentEl: HTMLElement) => {
-      prevEls.push(currentEl);
-
-      const editorAreaElId = this.editorAreaEl!.id;
-
-      /// Recursive transverse the DOM to the parent element
-      if (
-        currentEl.parentElement &&
-        currentEl.id !== editorAreaElId
-      ) {
-        isEditorEl(currentEl.parentElement);
-      }
-
-      if (currentEl.id === editorAreaElId && prevEls.length > 1) {
-        const parentEl = prevEls.at(-2) as HTMLElement;
-
-        /// Ensure there are no duplicate Alignment styles
-        this.removeDuplicateAlignStyles(parentEl, className);
-
-        /// Toggling/Applying multiple css styles
-        if (
-          className.includes(',') &&
-          className !== EditorSupportedFeatures.INDENT &&
-          className !== EditorSupportedFeatures.OUTDENT
-        ) {
-          const styleFormatters = className.split(',');
-
-          styleFormatters.forEach(cssStyle => {
-            /// Remove a style if it is already there
-            if (parentEl.classList.contains(cssStyle)) {
-              parentEl.classList.remove(cssStyle);
-            } else {
-              // Add a style if not there
-              parentEl.classList.add(cssStyle);
-            }
-          });
-        }
-
-        /// Toggling/Applying only a single class name
-        if (
-          !className.includes(',') &&
-          className !== EditorSupportedFeatures.INDENT &&
-          className !== EditorSupportedFeatures.OUTDENT
-        ) {
-          parentEl.classList.toggle(className);
-        }
-
-        let prevElsReset: any[] = [];
-        /// Handling indentation
-        if (
-          className === EditorSupportedFeatures.INDENT ||
-          className === EditorSupportedFeatures.OUTDENT
-        ) {
-          prevElsReset = this.indentSelectedText(parentEl, className);
-        }
-
-        prevEls = prevElsReset || [];
-      }
+    /// Format element by adding a CSS style
+    const factoryWrapper = (els: Array<HTMLElement>) => {
+      this.cssFormatFactory(className, els);
     };
 
-    isEditorEl(selectedEl);
+    this.findBlockEl(selectedEl, factoryWrapper);
+  }
+
+  /**
+   * Finds the block element from the selected element (typically a parent element)
+   *
+   * @param currentHtmlEl The current selected parent of the selected node
+   * @param cb A callback that runs when the block element is found.
+   * @returns Exit the function if the condition is not met
+   */
+  findBlockEl(
+    currentHtmlEl: HTMLElement,
+    cb: (...args: any) => void
+  ) {
+    if (!currentHtmlEl) return;
+
+    this.traversedEls.push(currentHtmlEl);
+
+    const editorAreaElId = this.editorAreaEl!.id;
+    const isBlock = currentHtmlEl.dataset.block;
+
+    if (
+      currentHtmlEl.parentElement &&
+      currentHtmlEl.id !== editorAreaElId &&
+      !isBlock
+    ) {
+      this.findBlockEl(currentHtmlEl.parentElement, cb);
+      return;
+    }
+
+    if (isBlock === 'true' && this.traversedEls.length > 0 && !!cb) {
+      // return this.trdEls;
+      cb(this.traversedEls);
+
+      /// Reset collection
+      this.traversedEls = [];
+      return;
+    }
+  }
+
+  /**
+   * Toggles a css recursively class and indent css
+   *
+   * Responsible of toggling a css style (class name) to the parent element
+   *
+   * @param className a string of comma separated strings representing css (one or more)
+   * @param transverseEls A collection of traversed HTML election
+   */
+  cssFormatFactory(
+    className: string,
+    transverseEls: Array<HTMLElement>
+  ) {
+    const parentEl = transverseEls.at(-1) as HTMLElement;
+
+    /// Ensure there are no duplicate Alignment styles
+    this.removeDuplicateAlignStyles(parentEl, className);
+
+    /// Toggling/Applying multiple css styles
+    if (
+      className.includes(',') &&
+      className !== EditorSupportedFeatures.INDENT &&
+      className !== EditorSupportedFeatures.OUTDENT
+    ) {
+      const styleFormatters = className.split(',');
+
+      styleFormatters.forEach(cssStyle => {
+        /// Remove a style if it is already there
+        if (parentEl.classList.contains(cssStyle)) {
+          parentEl.classList.remove(cssStyle);
+        } else {
+          // Add a style if not there
+          parentEl.classList.add(cssStyle);
+        }
+      });
+    }
+
+    /// Toggling/Applying only a single class name
+    if (
+      !className.includes(',') &&
+      className !== EditorSupportedFeatures.INDENT &&
+      className !== EditorSupportedFeatures.OUTDENT
+    ) {
+      parentEl.classList.toggle(className);
+    }
+
+    let prevElsReset: any[] = [];
+
+    /// Handling indentation
+    if (
+      className === EditorSupportedFeatures.INDENT ||
+      className === EditorSupportedFeatures.OUTDENT
+    ) {
+      prevElsReset = this.indentSelectedText(parentEl, className);
+    }
+
+    transverseEls = prevElsReset || [];
   }
 
   /**
