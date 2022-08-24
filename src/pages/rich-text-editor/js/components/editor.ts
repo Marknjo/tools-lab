@@ -132,6 +132,14 @@ class Editor
           return;
         }
 
+        if (
+          !this.range ||
+          !this.selection ||
+          !this.plainSelectedText
+        ) {
+          return;
+        }
+
         const targetAction = targetSelectionEl.id
           .split('-')
           .slice(1)
@@ -140,10 +148,61 @@ class Editor
         /// Handle different selection actions based on their id type
         switch (targetAction) {
           case EditorSupportedFeatures.HEADINGS:
-            console.log({
-              targetAction,
-              value: targetSelectionEl.value,
-            });
+            const selectedValue = targetSelectionEl.value;
+            const selectedNode = this.range.commonAncestorContainer;
+
+            const selectedParentEl = selectedNode.parentElement;
+            const parentNodeName = selectedParentEl?.nodeName;
+
+            console.log({ parentNodeName });
+
+            const headingsFormatter = (
+              elsCollection: Array<HTMLElement>
+            ) => {
+              const blockEl = elsCollection.at(-1);
+
+              if (!blockEl) {
+                return;
+              }
+
+              let tag: FormatHTMLTagActions;
+
+              switch (selectedValue) {
+                case 'h2':
+                  tag = FormatHTMLTagActions.H2;
+                  break;
+
+                case 'h3':
+                  tag = FormatHTMLTagActions.H3;
+                  break;
+
+                case 'h4':
+                  tag = FormatHTMLTagActions.H4;
+                  break;
+
+                case 'h5':
+                  tag = FormatHTMLTagActions.H5;
+                  break;
+
+                case 'h6':
+                  tag = FormatHTMLTagActions.H6;
+                  break;
+
+                default:
+                  tag = FormatHTMLTagActions.H1;
+                  break;
+              }
+
+              const parentEl = blockEl.parentElement;
+
+              const headingTemplate = this.el(tag);
+
+              headingTemplate.innerHTML = blockEl.innerHTML;
+
+              parentEl?.replaceChild(headingTemplate, blockEl);
+            };
+
+            this.findBlockEl(selectedParentEl!, headingsFormatter);
 
             break;
         }
