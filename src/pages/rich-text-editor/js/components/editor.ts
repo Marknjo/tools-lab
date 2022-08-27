@@ -152,63 +152,81 @@ class Editor
             const selectedNode = this.range.commonAncestorContainer;
 
             const selectedParentEl = selectedNode.parentElement;
-            const parentNodeName = selectedParentEl?.nodeName;
+            //const parentNodeName = selectedParentEl?.nodeName;
 
-            console.log({ parentNodeName });
+            // Collection wrapper container
+            const collectionWrapper = (elsCollection: Array<HTMLElement>) => {
+              this.headingsFormatter(elsCollection, selectedValue)
+            }
 
-            const headingsFormatter = (
-              elsCollection: Array<HTMLElement>
-            ) => {
-              const blockEl = elsCollection.at(-1);
-
-              if (!blockEl) {
-                return;
-              }
-
-              let tag: FormatHTMLTagActions;
-
-              switch (selectedValue) {
-                case 'h2':
-                  tag = FormatHTMLTagActions.H2;
-                  break;
-
-                case 'h3':
-                  tag = FormatHTMLTagActions.H3;
-                  break;
-
-                case 'h4':
-                  tag = FormatHTMLTagActions.H4;
-                  break;
-
-                case 'h5':
-                  tag = FormatHTMLTagActions.H5;
-                  break;
-
-                case 'h6':
-                  tag = FormatHTMLTagActions.H6;
-                  break;
-
-                default:
-                  tag = FormatHTMLTagActions.H1;
-                  break;
-              }
-
-              const parentEl = blockEl.parentElement;
-
-              const headingTemplate = this.el(tag);
-
-              headingTemplate.innerHTML = blockEl.innerHTML;
-
-              parentEl?.replaceChild(headingTemplate, blockEl);
-            };
-
-            this.findBlockEl(selectedParentEl!, headingsFormatter);
+            
+            // Format the block level element
+            this.findBlockEl(selectedParentEl!, collectionWrapper);
 
             break;
         }
       });
     }
   }
+
+  /**
+   * Formats a selected text by replacing it's 
+   * parent block level element with a selected h1-h2 tags
+   * 
+   * @param elsCollection Collection of the selected nexsted elements
+   * @param selectedValue A string of the parent element inner children
+   * @returns stops further execution if a block element cannot be found
+   */
+headingsFormatter (
+    elsCollection: Array<HTMLElement>,
+    selectedValue: string
+  ) {
+    const blockEl = elsCollection.at(-1);
+
+    if (!blockEl) {
+      return;
+    }
+
+    let tag: FormatHTMLTagActions;
+
+    switch (selectedValue) {
+      case 'h1':
+        tag = FormatHTMLTagActions.H1;
+        break;
+
+      case 'h2':
+        tag = FormatHTMLTagActions.H2;
+        break;
+
+      case 'h3':
+        tag = FormatHTMLTagActions.H3;
+        break;
+
+      case 'h4':
+        tag = FormatHTMLTagActions.H4;
+        break;
+
+      case 'h5':
+        tag = FormatHTMLTagActions.H5;
+        break;
+
+      case 'h6':
+        tag = FormatHTMLTagActions.H6;
+        break;
+
+      default:
+        tag = FormatHTMLTagActions.PARAGRAPH;
+        break;
+    }
+
+    const parentEl = blockEl.parentElement;
+
+    const headingTemplate = this.el(tag);
+
+    headingTemplate.innerHTML = blockEl.innerHTML;
+
+    parentEl?.replaceChild(headingTemplate, blockEl);
+  };
 
   /**
    * Handles listening to the click event on supported menu buttons
