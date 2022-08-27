@@ -155,11 +155,12 @@ class Editor
             //const parentNodeName = selectedParentEl?.nodeName;
 
             // Collection wrapper container
-            const collectionWrapper = (elsCollection: Array<HTMLElement>) => {
-              this.headingsFormatter(elsCollection, selectedValue)
-            }
+            const collectionWrapper = (
+              elsCollection: Array<HTMLElement>
+            ) => {
+              this.headingsFormatter(elsCollection, selectedValue);
+            };
 
-            
             // Format the block level element
             this.findBlockEl(selectedParentEl!, collectionWrapper);
 
@@ -170,63 +171,82 @@ class Editor
   }
 
   /**
-   * Formats a selected text by replacing it's 
+   * Formats a selected text by replacing it's
    * parent block level element with a selected h1-h2 tags
-   * 
+   *
    * @param elsCollection Collection of the selected nexsted elements
    * @param selectedValue A string of the parent element inner children
    * @returns stops further execution if a block element cannot be found
    */
-headingsFormatter (
+  private headingsFormatter(
     elsCollection: Array<HTMLElement>,
     selectedValue: string
   ) {
     const blockEl = elsCollection.at(-1);
 
-    if (!blockEl) {
+    if (!blockEl || !this.editorAreaEl) {
       return;
     }
 
-    let tag: FormatHTMLTagActions;
+    const replaceParentElWith = (
+      blockEl: HTMLElement,
+      tag: FormatHTMLTagActions
+    ) => {
+      const parentEl = blockEl.parentElement;
 
-    switch (selectedValue) {
-      case 'h1':
-        tag = FormatHTMLTagActions.H1;
-        break;
+      const headingTemplate = this.el(tag);
 
-      case 'h2':
-        tag = FormatHTMLTagActions.H2;
-        break;
+      headingTemplate.innerHTML = blockEl.innerHTML;
 
-      case 'h3':
-        tag = FormatHTMLTagActions.H3;
-        break;
+      if (headingTemplate.nodeName === 'P') {
+        headingTemplate.dataset.block = 'true';
+      }
 
-      case 'h4':
-        tag = FormatHTMLTagActions.H4;
-        break;
+      parentEl?.replaceChild(headingTemplate, blockEl);
+    };
 
-      case 'h5':
-        tag = FormatHTMLTagActions.H5;
-        break;
+    const getTag = (selector: string) => {
+      let tag: FormatHTMLTagActions;
 
-      case 'h6':
-        tag = FormatHTMLTagActions.H6;
-        break;
+      const lowercasedSelector = selector.toLocaleLowerCase();
 
-      default:
-        tag = FormatHTMLTagActions.PARAGRAPH;
-        break;
-    }
+      switch (lowercasedSelector) {
+        case 'h1':
+          tag = FormatHTMLTagActions.H1;
+          break;
 
-    const parentEl = blockEl.parentElement;
+        case 'h2':
+          tag = FormatHTMLTagActions.H2;
+          break;
 
-    const headingTemplate = this.el(tag);
+        case 'h3':
+          tag = FormatHTMLTagActions.H3;
+          break;
 
-    headingTemplate.innerHTML = blockEl.innerHTML;
+        case 'h4':
+          tag = FormatHTMLTagActions.H4;
+          break;
 
-    parentEl?.replaceChild(headingTemplate, blockEl);
-  };
+        case 'h5':
+          tag = FormatHTMLTagActions.H5;
+          break;
+
+        case 'h6':
+          tag = FormatHTMLTagActions.H6;
+          break;
+
+        default:
+          tag = FormatHTMLTagActions.PARAGRAPH;
+          break;
+      }
+
+      return tag;
+    };
+
+    // Replace selected element with specified tag
+    const tag = getTag(selectedValue);
+    replaceParentElWith(blockEl, tag);
+  }
 
   /**
    * Handles listening to the click event on supported menu buttons
