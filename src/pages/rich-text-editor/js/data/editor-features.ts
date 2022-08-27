@@ -155,7 +155,7 @@ const editorFeatures: ButtonsCollection = [
     title: 'Make Selected Text a Heading',
     isEnabled: true,
     type: FeatureType.SELECT,
-    selectOptions: ['h1', 'h2', 'h3', 'h4', 'h5'],
+    selectOptions: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
   },
   {
     // To be applied globally or per parent tag
