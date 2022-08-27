@@ -243,6 +243,62 @@ class Editor
       return tag;
     };
 
+    const swapHeadingType = (
+      selectedValue: string,
+      prevBlockEl: HTMLElement,
+      prevBlockElName: string
+    ) => {
+      /// Headings collection name
+      const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+
+      /// Prevent further execution if the prev block element is not a h1-h6
+      if (!headings.includes(prevBlockElName)) {
+        return;
+      }
+
+      /// Ensure change selector to the current selected
+      /// heading element if prev is same as selected
+      if (prevBlockElName === selectedValue.toLocaleUpperCase()) {
+        //@TODO: Implement auto select selected option value on selecting the text;
+        return;
+      }
+
+      /// Handle previous element case
+      if (prevBlockElName !== selectedValue.toLocaleUpperCase()) {
+        /// Replace selected elements
+        const tag = getTag(selectedValue);
+        replaceParentElWith(prevBlockEl, tag);
+
+        /// Stop further execution
+        return;
+      }
+    };
+
+    const blockElName = blockEl.nodeName;
+
+    /// if it is a paragraph, replace element
+    /// if blockElName is a h1-h6, replace with incoming h1-h6 if not a match
+    /// if div,section,article,li,main,caption,fig,footer,header,
+    /// wrap children - do not wrap, use it as a parent to wrap the children
+    /// if others,
+    //console.log({ blockElName });
+    if (blockElName === this.editorAreaEl.nodeName) {
+      const prevBlockEl = elsCollection.at(-2);
+
+      /// Do not execute if we do not have a previous block element
+      if (!prevBlockEl) {
+        return;
+      }
+
+      const prevBlockElName = prevBlockEl.nodeName;
+
+      /// Swap headings if h1-h2. If equal do not
+      swapHeadingType(selectedValue, prevBlockEl, prevBlockElName);
+
+      /// Tag already applied
+      return;
+    }
+
     // Replace selected element with specified tag
     const tag = getTag(selectedValue);
     replaceParentElWith(blockEl, tag);
