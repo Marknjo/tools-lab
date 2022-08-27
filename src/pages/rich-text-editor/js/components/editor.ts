@@ -278,6 +278,7 @@ class Editor
 
     /// if it is a paragraph, replace element
     /// if blockElName is a h1-h6, replace with incoming h1-h6 if not a match
+    /// @TODO: below on implementing their complexity in the editor
     /// if div,section,article,li,main,caption,fig,footer,header,
     /// wrap children - do not wrap, use it as a parent to wrap the children
     /// if others,

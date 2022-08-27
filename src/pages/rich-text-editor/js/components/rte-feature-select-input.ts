@@ -53,16 +53,12 @@ export class FeatureSelectInput
     selectEl.title = this.configs.title;
     selectEl.id = `feat-${this.configs.id}`;
 
-    /// configure input
-    const options = this.configs.selectOptions;
-    if (options && options.length > 0) {
-      this.configureSelectOptions(selectEl);
-    }
-
+    const selectOptions = this.configs.selectOptions;
     // get options configs
+    /// @DEBUG: defaults not implemented correctly
     switch (this.configs.id) {
       case EditorSupportedFeatures.FONT_FAMILY:
-        this.configs.selectOptions ||
+        selectOptions ||
           this.configureSelectOptions(
             selectEl,
             this.defaultFontTypes
@@ -70,12 +66,17 @@ export class FeatureSelectInput
         break;
 
       case EditorSupportedFeatures.FONT_SIZE:
-        this.configs.selectOptions ||
+        selectOptions ||
           this.configureSelectOptions(
             selectEl,
             this.defaultFontSizes
           );
         break;
+    }
+
+    /// configure input
+    if (selectOptions && selectOptions.length > 0) {
+      this.configureSelectOptions(selectEl);
     }
   }
 
@@ -94,19 +95,37 @@ export class FeatureSelectInput
       ? options
       : [];
 
-    options.forEach(option => {
-      const optionEl = document.createElement('option');
+    if (options.length > 0) {
+      /**
+       *  Customize different selectoers
+       */
+      /// Add paragraph select option to the
+      /// headings select menu as a default selector
+      if (this.configs.id === EditorSupportedFeatures.HEADINGS) {
+        this.insetSelectOptions('p', selectEl);
+      }
 
-      optionEl.setAttribute('value', option);
-
-      optionEl.textContent = `${option}`.toUpperCase();
-
-      // return optionEl;
-      selectEl.insertAdjacentElement(INSERTABLE.BEFORE_END, optionEl);
-    });
+      /**
+       * Add default options
+       */
+      options.forEach(option => {
+        this.insetSelectOptions(option, selectEl);
+      });
+    }
 
     // console.log(selectOptions);
 
     // selectEl.innerHTML = selectOptions.join('');
+  }
+
+  private insetSelectOptions(option: string, selectEl: HTMLElement) {
+    const optionEl = document.createElement('option');
+
+    optionEl.setAttribute('value', option);
+
+    optionEl.textContent = `${option}`.toUpperCase();
+
+    // return optionEl;
+    selectEl.insertAdjacentElement(INSERTABLE.BEFORE_END, optionEl);
   }
 }
