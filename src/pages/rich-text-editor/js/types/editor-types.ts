@@ -1,3 +1,12 @@
+/**
+ * Helps to mark or identify editor elements
+ * Mostly, block types
+ **/
+export enum EditorElTypes {
+  PARA = 'para',
+  BLOCK = 'block',
+}
+
 export enum FeatureType {
   BUTTON = 'button',
   SELECT = 'select',

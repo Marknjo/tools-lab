@@ -2,6 +2,7 @@ import Component from '../core/base-component';
 import { ComponentConfigurables } from '../core/types/component-configurables';
 import { editorFeatures } from '../data/editor-features';
 import {
+  EditorElTypes,
   EditorSupportedFeatures,
   FeatureType,
 } from '../types/editor-types';
@@ -199,7 +200,7 @@ class Editor
       headingTemplate.innerHTML = blockEl.innerHTML;
 
       if (headingTemplate.nodeName === 'P') {
-        headingTemplate.dataset.block = 'true';
+        headingTemplate.dataset.el = EditorElTypes.PARA;
       }
 
       parentEl?.replaceChild(headingTemplate, blockEl);
@@ -493,7 +494,7 @@ class Editor
     this.traversedEls.push(currentHtmlEl);
 
     const editorAreaElId = this.editorAreaEl!.id;
-    const isBlock = currentHtmlEl.dataset.block;
+    const isBlock = currentHtmlEl.dataset.el;
 
     if (
       currentHtmlEl.parentElement &&
@@ -504,7 +505,12 @@ class Editor
       return;
     }
 
-    if (isBlock === 'true' && this.traversedEls.length > 0 && !!cb) {
+    if (
+      (isBlock === EditorElTypes.BLOCK ||
+        isBlock === EditorElTypes.PARA) &&
+      this.traversedEls.length > 0 &&
+      !!cb
+    ) {
       // return this.trdEls;
       cb(this.traversedEls);
 
