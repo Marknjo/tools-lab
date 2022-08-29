@@ -5,6 +5,7 @@
 export enum EditorElTypes {
   PARA = 'para',
   BLOCK = 'block',
+  BASE = 'base', // the base element of the editor container
 }
 
 export enum FeatureType {

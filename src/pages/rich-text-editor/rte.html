@@ -148,7 +148,7 @@
     </template>
 
     <template id="template-editor-area">
-        <article contenteditable="true" data-block="true"
+        <article contenteditable="true" data-el="base"
             class="min-h-[60vh] p-3 text-lg border border-blue-200 rounded-md hover:border-blue-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400">
             <p class="text-gray-400" id="default-p" data-el="para">Write an awesome article...</p>
         </article>
@@ -172,6 +172,10 @@
             <div class="-indent-14"></div>
             <div class="-indent-16"></div>
             <div class="-indent-20"></div>
+
+            <!-- List styles -->
+            <ol class="list-decimal list-inside ml-6"></ol>
+            <ul class="list-disc list-inside ml-6"></ul>
         </div>
     </template>
     <!-- Scripts -->

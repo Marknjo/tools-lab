@@ -1,5 +1,6 @@
 import Component from '../core/base-component';
 import { ComponentConfigurables } from '../core/types/component-configurables';
+import { INSERTABLE } from '../core/types/insert-positions';
 import { editorFeatures } from '../data/editor-features';
 import {
   EditorElTypes,
@@ -20,6 +21,7 @@ enum FormatHTMLTagActions {
   SUBSCRIPT = 'sub',
   OL_LIST = 'ol',
   UL_LIST = 'ul',
+  LIST_EL = 'li',
   ANCHOR = 'a',
   H1 = 'h1',
   H2 = 'h2',
@@ -348,12 +350,124 @@ class Editor
         }
 
         /// @TODO: Add notification if a user clicks the action menu without selecting a string
-        if (targetAction && this.range) {
+        if (targetAction && !!this.range && !!this.selection) {
           const selection = this.selection;
           const range = this.range;
 
           /// handle text formatting
           switch (targetAction) {
+            case EditorSupportedFeatures.OL_LIST:
+              /// @TODO: Add support for ol and ul
+              // 1. find the parent element
+              //    - should be para-element
+              //    - or block element
+              //    -
+              // 2. get the text inside the list elements as plain text (can wrap it with a paragraph)
+              // 3. loop through the text, adding list element
+              //    - data-el="block"
+              //    - data-el="para"
+              // 4. Wrap the text inside the ol element (feature reusable)
+              // 5. Handle enter events
+              //    - adds a new list element
+              // 6. Handle enter by shift select
+              // 7. Handle swap ol with ul and vice versa
+
+              const parentEl = range.commonAncestorContainer;
+
+              if (!this.plainSelectedText || !parentEl) {
+                return;
+              }
+
+              const parentElName = parentEl.nodeName;
+              const elementBlockName = (parentEl as HTMLElement)
+                .dataset.el;
+
+              /// Do not process the block names
+              if (!elementBlockName) {
+                return;
+              }
+
+              console.log({
+                // parentEl,
+                parentElName,
+                elementBlockName,
+              });
+              /// @TODO: Activities
+              /// 1. wrap the content with ul
+              /// 2. remove content
+              /// 3. replace with the content
+              /// 4. Delete the nodes
+
+              const createOlListEl = this.el(
+                FormatHTMLTagActions.OL_LIST
+              );
+              createOlListEl.classList.add(
+                'list-decimal',
+                'list-inside',
+                'ml-6'
+              );
+
+              const selectedTextCollection =
+                this.plainSelectedText.split('\n');
+
+              // only one paragraph selected
+              if (this.selectedTextCollection.length === 1) {
+              }
+
+              selectedTextCollection.forEach(para => {
+                if (para !== '') {
+                  const createLiEl = this.el(
+                    FormatHTMLTagActions.LIST_EL
+                  );
+                  createLiEl.innerHTML = para;
+
+                  createOlListEl.insertAdjacentElement(
+                    INSERTABLE.BEFORE_END,
+                    createLiEl
+                  );
+                }
+              });
+
+              const prevEl =
+                range.startContainer.parentElement
+                  ?.previousElementSibling;
+
+              prevEl?.insertAdjacentElement(
+                INSERTABLE.AFTER_END,
+                createOlListEl
+              );
+
+              console.log({
+                start:
+                  range.startContainer.parentElement
+                    ?.previousElementSibling,
+              });
+
+              console.log(range.endContainer);
+              range.setEnd(range.endContainer, 1);
+
+              range.extractContents();
+              range.detach();
+              selection.removeAllRanges();
+
+              // const newRange = this.range;
+
+              // range.insertNode(createOlListEl);
+
+              // range.deleteContents();
+
+              // const clone = range.cloneContents();
+
+              //parentEl.replaceChild(createOlListEl, selection);
+
+              //const parentEl = selection.
+
+              // const createOlListEl = this.el(
+              //   FormatHTMLTagActions.OL_LIST
+              // );
+
+              break;
+
             /// Bold Selected Text
             case EditorSupportedFeatures.BOLD:
               this.textFormatterByWrapping(
