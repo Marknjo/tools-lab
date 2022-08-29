@@ -172,6 +172,13 @@ class Editor
   }
 
   /**
+   * Handles reset of traversed container DOM element to empty
+   */
+  private resetTraversedContainer() {
+    this.traversedEls = [];
+  }
+
+  /**
    * Formats a selected text by replacing it's
    * parent block level element with a selected h1-h2 tags
    *
@@ -204,6 +211,9 @@ class Editor
       }
 
       parentEl?.replaceChild(headingTemplate, blockEl);
+
+      /// Reset traversed container
+      this.resetTraversedContainer();
     };
 
     const getTag = (selector: string) => {
@@ -244,6 +254,7 @@ class Editor
       return tag;
     };
 
+    /// @BUG: Function not working correctly - Cannot swap selected h1-h6
     const swapHeadingType = (
       selectedValue: string,
       prevBlockEl: HTMLElement,
@@ -254,6 +265,7 @@ class Editor
 
       /// Prevent further execution if the prev block element is not a h1-h6
       if (!headings.includes(prevBlockElName)) {
+        this.resetTraversedContainer();
         return;
       }
 
@@ -261,6 +273,7 @@ class Editor
       /// heading element if prev is same as selected
       if (prevBlockElName === selectedValue.toLocaleUpperCase()) {
         //@TODO: Implement auto select selected option value on selecting the text;
+        this.resetTraversedContainer();
         return;
       }
 
@@ -273,6 +286,7 @@ class Editor
         /// Stop further execution
         return;
       }
+      this.resetTraversedContainer();
     };
 
     const blockElName = blockEl.nodeName;
@@ -289,6 +303,7 @@ class Editor
 
       /// Do not execute if we do not have a previous block element
       if (!prevBlockEl) {
+        this.resetTraversedContainer();
         return;
       }
 
