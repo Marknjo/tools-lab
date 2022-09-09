@@ -372,13 +372,35 @@ class Editor
               // 6. Handle enter by shift select
               // 7. Handle swap ol with ul and vice versa
 
-              const parentEl = range.commonAncestorContainer;
+              let parentEl = range.commonAncestorContainer;
 
               if (!this.plainSelectedText || !parentEl) {
                 return;
               }
 
               const parentElName = parentEl.nodeName;
+
+              /// Check if parent element is a #TEXT
+              if (parentElName === '#text') {
+                console.log({
+                  parentEl,
+                  parentElName,
+                  parentElPrev: parentEl.parentElement,
+                });
+
+                const foundParentEl = parentEl.parentElement;
+
+                if (!foundParentEl) {
+                  return;
+                }
+
+                if (foundParentEl.nodeName !== 'P') {
+                  return;
+                }
+
+                parentEl = foundParentEl;
+              }
+
               const elementBlockName = (parentEl as HTMLElement)
                 .dataset.el;
 
@@ -387,11 +409,6 @@ class Editor
                 return;
               }
 
-              console.log({
-                // parentEl,
-                parentElName,
-                elementBlockName,
-              });
               /// @TODO: Activities
               /// 1. wrap the content with ul
               /// 2. remove content
@@ -413,6 +430,8 @@ class Editor
               // only one paragraph selected
               if (this.selectedTextCollection.length === 1) {
               }
+
+              console.log(selectedTextCollection);
 
               selectedTextCollection.forEach(para => {
                 if (para !== '') {
@@ -437,34 +456,11 @@ class Editor
                 createOlListEl
               );
 
-              console.log({
-                start:
-                  range.startContainer.parentElement
-                    ?.previousElementSibling,
-              });
-
-              console.log(range.endContainer);
               range.setEnd(range.endContainer, 1);
 
               range.extractContents();
               range.detach();
               selection.removeAllRanges();
-
-              // const newRange = this.range;
-
-              // range.insertNode(createOlListEl);
-
-              // range.deleteContents();
-
-              // const clone = range.cloneContents();
-
-              //parentEl.replaceChild(createOlListEl, selection);
-
-              //const parentEl = selection.
-
-              // const createOlListEl = this.el(
-              //   FormatHTMLTagActions.OL_LIST
-              // );
 
               break;
 
